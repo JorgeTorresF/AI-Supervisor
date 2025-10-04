@@ -1,0 +1,63 @@
+[
+  {
+    "id": "evt_001",
+    "timestamp": "2025-08-18T16:15:49.800323",
+    "event_type": "task_started",
+    "level": "info",
+    "agent_id": "agent_001",
+    "task_id": "task_001",
+    "cause": "User request",
+    "action": "Document processing",
+    "outcome": "started",
+    "metadata": {
+      "document_type": "PDF",
+      "size": 2048576
+    }
+  },
+  {
+    "id": "evt_002",
+    "timestamp": "2025-08-18T16:15:49.800332",
+    "event_type": "decision_made",
+    "level": "info",
+    "agent_id": "agent_001",
+    "task_id": "task_001",
+    "cause": "Classification required",
+    "action": "Document classification",
+    "outcome": "classified",
+    "confidence": 0.87,
+    "metadata": {
+      "classification": "invoice",
+      "confidence": 0.87
+    }
+  },
+  {
+    "id": "evt_003",
+    "timestamp": "2025-08-18T16:15:49.800334",
+    "event_type": "task_completed",
+    "level": "info",
+    "agent_id": "agent_001",
+    "task_id": "task_001",
+    "cause": "Processing finished",
+    "action": "Finalize results",
+    "outcome": "success",
+    "metadata": {
+      "execution_time": 23.5,
+      "pages_processed": 5
+    }
+  },
+  {
+    "id": "evt_004",
+    "timestamp": "2025-08-18T16:15:49.800337",
+    "event_type": "task_failed",
+    "level": "error",
+    "agent_id": "agent_002",
+    "task_id": "task_002",
+    "cause": "Timeout occurred",
+    "action": "Data processing",
+    "outcome": "timeout",
+    "metadata": {
+      "execution_time": 305,
+      "error_type": "timeout"
+    }
+  }
+]

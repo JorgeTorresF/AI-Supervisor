@@ -1,0 +1,5 @@
+id,timestamp,event_type,level,agent_id,task_id,outcome
+evt_001,2025-08-18T16:15:49.800323,task_started,info,agent_001,task_001,started
+evt_002,2025-08-18T16:15:49.800332,decision_made,info,agent_001,task_001,classified
+evt_003,2025-08-18T16:15:49.800334,task_completed,info,agent_001,task_001,success
+evt_004,2025-08-18T16:15:49.800337,task_failed,error,agent_002,task_002,timeout

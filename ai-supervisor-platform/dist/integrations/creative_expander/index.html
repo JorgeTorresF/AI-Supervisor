@@ -1,0 +1,4126 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Idea Expander & AI Code Assistant</title>
+    <style>
+        :root {
+            --primary: #4a6bff;
+            --secondary: #7e57c2;
+            --tertiary: #ff6b9f;
+            --quaternary: #00c3ab;
+            --background: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --light-text: #666666;
+            --accent: #ff5252;
+            --border: #e0e0e0;
+            --gradient: linear-gradient(45deg, var(--primary), var(--secondary), var(--tertiary), var(--quaternary));
+            --success: #4CAF50;
+            --info: #2196F3;
+            --warning: #FF9800;
+            --error: #F44336;
+            --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --code-bg: #f5f5f5;
+            --comment-color: #6A9955;
+            --learning-primary: #2e7d32;
+            --learning-secondary: #00796b;
+            --learning-gradient: linear-gradient(45deg, var(--learning-primary), var(--learning-secondary), var(--quaternary), var(--info));
+            --game-gold: #FFD700;
+            --game-silver: #C0C0C0;
+            --game-bronze: #CD7F32;
+            --game-xp-gradient: linear-gradient(45deg, #4CAF50, #8BC34A);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        h1 {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(74, 107, 255, 0.1);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(74, 107, 255, 0.3);
+            }
+        }
+
+        .subtitle {
+            color: var(--light-text);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Idea Generator Styles */
+        .idea-generator {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--panel-shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .idea-generator:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .idea-generator::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .idea-input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .idea-input {
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--card-bg);
+            color: var(--text);
+        }
+
+        .idea-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+            outline: none;
+        }
+
+        .generate-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            align-self: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .generate-btn:hover::after {
+            opacity: 1;
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: rotate(45deg) translateX(-100%);
+            }
+            100% {
+                transform: rotate(45deg) translateX(100%);
+            }
+        }
+
+        .generate-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .generated-ideas {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ideas-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .idea-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .idea-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .idea-card h3 {
+            margin-top: 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .idea-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 30px;
+            height: 30px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .idea-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .idea-action-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: color 0.3s;
+            padding: 0.3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .idea-action-btn:hover {
+            color: var(--primary);
+            background: rgba(74, 107, 255, 0.1);
+        }
+
+        .connections-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(126, 87, 194, 0.05);
+            border-radius: 12px;
+            border: 1px dashed var(--secondary);
+            position: relative;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 6px;
+            background: rgba(74, 107, 255, 0.2);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 30%;
+            background: var(--gradient);
+            border-radius: 3px;
+            animation: loadingAnim 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingAnim {
+            0% {
+                left: -30%;
+            }
+            100% {
+                left: 130%;
+            }
+        }
+
+        .loading-text {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--light-text);
+            text-align: center;
+        }
+
+        /* Tabs for Library/Generator */
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--light-text);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .tab.active {
+            color: var(--primary);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            animation: tabActivate 0.3s ease-in-out;
+        }
+
+        @keyframes tabActivate {
+            from {
+                width: 0;
+                left: 50%;
+            }
+            to {
+                width: 100%;
+                left: 0;
+            }
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        /* Search container and other existing styles */
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--card-bg);
+            color: var(--text);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .category-btn:hover {
+            background-color: rgba(74, 107, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .category-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .category-content {
+            margin-bottom: 3rem;
+            transition: opacity 0.3s;
+        }
+
+        .category-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .prompt-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .prompt-text {
+            margin-bottom: 1rem;
+        }
+
+        .prompt-card-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .card-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: color 0.3s, background 0.3s;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .card-btn:hover {
+            color: var(--primary);
+            background: rgba(74, 107, 255, 0.1);
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            top: -30px;
+            right: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background 0.3s;
+            z-index: 100;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .action-buttons {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 100;
+        }
+
+        .action-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Toast notification */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .toast {
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            animation: toastFadeIn 0.3s ease, toastFadeOut 0.3s ease 2.7s forwards;
+            max-width: 350px;
+        }
+
+        .toast-success {
+            background-color: var(--success);
+        }
+
+        .toast-info {
+            background-color: var(--info);
+        }
+
+        .toast-icon {
+            margin-right: 0.75rem;
+        }
+
+        @keyframes toastFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes toastFadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* History section */
+        .history-section {
+            margin-top: 2rem;
+        }
+
+        .history-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .history-item:hover {
+            background: rgba(74, 107, 255, 0.05);
+        }
+
+        .history-text {
+            font-weight: 500;
+        }
+
+        .history-date {
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+
+        /* Add new prompt form */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--card-bg);
+            color: var(--text);
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--card-bg);
+            color: var(--text);
+        }
+
+        .export-options {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .export-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .export-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .export-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dark-mode {
+            --background: #121212;
+            --card-bg: #1e1e1e;
+            --text: #e0e0e0;
+            --light-text: #a0a0a0;
+            --border: #333333;
+            --code-bg: #2d2d2d;
+            --comment-color: #6A9955;
+        }
+
+        /* Saved ideas section */
+        .saved-ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .no-content {
+            text-align: center;
+            padding: 3rem;
+            color: var(--light-text);
+        }
+
+        /* Code Assistant Styles */
+        .code-assistant {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--panel-shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .code-assistant::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .code-input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .code-editor {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 200px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--code-bg);
+            color: var(--text);
+            line-height: 1.5;
+            tab-size: 4;
+        }
+
+        .code-editor:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+            outline: none;
+        }
+
+        .code-options {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .language-select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text);
+        }
+
+        .code-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .code-action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-action-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .code-action-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .result-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--code-bg);
+            display: none;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .result-content {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            tab-size: 4;
+        }
+
+        .comment-text {
+            color: var(--comment-color);
+        }
+
+        .copy-result-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .copy-result-btn:hover {
+            background: rgba(74, 107, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .api-key-form {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            background: rgba(74, 107, 255, 0.05);
+        }
+
+        .api-key-form p {
+            margin-top: 0;
+        }
+
+        .api-key-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .api-key-save {
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .code-templates {
+            margin-bottom: 1.5rem;
+        }
+
+        .template-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .template-btn:hover {
+            background: rgba(74, 107, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* Learning Assistant Styles */
+        .learning-assistant {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--panel-shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .learning-assistant::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--learning-gradient);
+        }
+
+        .learning-templates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .template-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--learning-primary);
+        }
+
+        .template-card h3 {
+            margin-top: 0;
+            color: var(--learning-primary);
+        }
+
+        .template-card p {
+            margin-bottom: 0;
+            color: var(--light-text);
+        }
+
+        .learning-principles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .principle-tag {
+            background: rgba(46, 125, 50, 0.1);
+            color: var(--learning-primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .learning-mode-selector {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .learning-mode-btn {
+            background: transparent;
+            border: 2px solid var(--learning-primary);
+            color: var(--learning-primary);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .learning-mode-btn.active {
+            background: var(--learning-primary);
+            color: white;
+        }
+
+        .learning-mode-btn:hover:not(.active) {
+            background: rgba(46, 125, 50, 0.1);
+        }
+
+        .learning-chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--learning-gradient);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .assistant-message {
+            align-self: flex-start;
+            background: white;
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            resize: none;
+            min-height: 60px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--learning-primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+        }
+
+        .send-btn {
+            background: var(--learning-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-btn:hover {
+            background: var(--learning-secondary);
+        }
+
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dark-mode .learning-chat-container {
+            border-color: #333;
+        }
+
+        .dark-mode .chat-messages {
+            background-color: #1a1a1a;
+        }
+
+        .dark-mode .assistant-message {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .prompt-grid, .ideas-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 5px;
+            }
+
+            .tab {
+                padding: 0.75rem 1rem;
+            }
+
+            .action-buttons {
+                bottom: 5rem;
+                left: 1rem;
+            }
+            
+            .code-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .code-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .language-select {
+                width: 100%;
+            }
+            
+            .learning-templates {
+                grid-template-columns: 1fr;
+            }
+            
+            .learning-chat-container {
+                height: 500px;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+        }
+
+        /* Visual Ideation Styles */
+        .visual-ideation {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--panel-shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .visual-ideation::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, var(--tertiary), var(--secondary), var(--quaternary), var(--primary));
+        }
+
+        .image-upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            background-color: rgba(74, 107, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .image-upload-container.drag-over {
+            background-color: rgba(74, 107, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .upload-icon {
+            width: 64px;
+            height: 64px;
+            color: var(--light-text);
+        }
+
+        .image-input {
+            display: none;
+        }
+
+        .upload-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .upload-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .image-preview-container {
+            margin-top: 1.5rem;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .prompt-strategy-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .prompt-strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .strategy-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--tertiary);
+        }
+
+        .strategy-card.selected {
+            border-color: var(--tertiary);
+            background-color: rgba(255, 107, 159, 0.05);
+        }
+
+        .strategy-card h3 {
+            margin-top: 0;
+            color: var(--tertiary);
+        }
+
+        .custom-prompt-container {
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .custom-prompt-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            background-color: var(--card-bg);
+            color: var(--text);
+        }
+
+        .custom-prompt-textarea:focus {
+            border-color: var(--tertiary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 159, 0.2);
+        }
+
+        .visual-generate-btn {
+            background: linear-gradient(45deg, var(--tertiary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1.5rem;
+            display: none;
+            align-self: center;
+        }
+
+        .visual-generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .visual-result-container {
+            margin-top: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            display: none;
+        }
+
+        .visual-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .visual-result-title {
+            margin: 0;
+            color: var(--tertiary);
+            font-size: 1.3rem;
+        }
+
+        .visual-result-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .visual-result-action-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .visual-result-action-btn:hover {
+            background: rgba(255, 107, 159, 0.1);
+            border-color: var(--tertiary);
+        }
+
+        .visual-result-content {
+            line-height: 1.7;
+        }
+
+        /* AI Chat Assistant Styles */
+        .ai-chat-assistant {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--panel-shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .ai-chat-assistant::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #FF9500, #FF2D55, #AF52DE, #5856D6);
+        }
+
+        .ai-chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+        }
+
+        .ai-chat-header {
+            background: linear-gradient(45deg, #FF9500, #FF2D55, #AF52DE, #5856D6);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-chat-header h3 {
+            margin: 0;
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: var(--background);
+        }
+
+        .ai-message {
+            max-width: 80%;
+            padding: 1rem;
+            border-radius: 12px;
+            position: relative;
+            animation: messageFadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes messageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: #5856D6;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .assistant-message {
+            align-self: flex-start;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+
+        .ai-chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+            background-color: var(--card-bg);
+        }
+
+        .ai-chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            resize: none;
+            min-height: 60px;
+            background-color: var(--card-bg);
+            color: var(--text);
+        }
+
+        .ai-chat-input:focus {
+            outline: none;
+            border-color: #5856D6;
+            box-shadow: 0 0 0 3px rgba(88, 86, 214, 0.2);
+        }
+
+        .ai-send-btn {
+            background: linear-gradient(45deg, #5856D6, #AF52DE);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-send-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .ai-send-btn:disabled {
+            background: var(--border);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .ai-chat-options {
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-chat-options-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-chat-option-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .ai-chat-option-btn:hover {
+            background-color: rgba(88, 86, 214, 0.1);
+            border-color: #5856D6;
+        }
+
+        .ai-thinking {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light-text);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-thinking-dots {
+            display: flex;
+        }
+
+        .ai-thinking-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--light-text);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: dotPulse 1.5s infinite ease-in-out;
+        }
+
+        .ai-thinking-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .ai-thinking-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .dark-mode .ai-chat-messages {
+            background-color: #1a1a1a;
+        }
+
+        .dark-mode .assistant-message {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+
+        @media (max-width: 768px) {
+            .ai-chat-container {
+                height: 500px;
+            }
+            
+            .ai-message {
+                max-width: 90%;
+            }
+        }
+        /* Gamification Styles */
+        .game-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            box-shadow: var(--panel-shadow);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            height: 50px;
+        }
+
+        .game-points {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .game-points-value {
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .level-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .level-badge {
+            background: var(--game-xp-gradient);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .xp-bar {
+            width: 150px;
+            height: 8px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .xp-progress {
+            height: 100%;
+            background: var(--game-xp-gradient);
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .achievements-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .achievement-badge {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .achievement-badge:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .reward-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: rewardPop 2s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes rewardPop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            10% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            20% { transform: translate(-50%, -50%) scale(1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--panel-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--light-text);
+            text-align: center;
+        }
+        /* Adjust container padding to accommodate the game bar */
+        .container {
+            padding-top: 4rem !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Gamification Bar -->
+    <div class="game-bar">
+        <div class="game-points">
+            <span>CREATIVE POINTS</span>
+            <span class="game-points-value" id="points-display">0</span>
+        </div>
+        <div class="level-indicator">
+            <div class="level-badge" id="level-badge">1</div>
+            <div class="xp-bar">
+                <div class="xp-progress" id="xp-progress"></div>
+            </div>
+        </div>
+        <div class="achievements-container" id="achievements-container">
+            <!-- Achievements will be added here -->
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Creative Idea Expander</h1>
+            <p class="subtitle">Transform your concepts into a galaxy of innovative ideas with AI-powered creative expansion</p>
+            
+            <div class="tabs">
+                <button class="tab active" data-tab="idea-generator">Idea Generator</button>
+                <button class="tab" data-tab="prompt-library">Prompt Library</button>
+                <button class="tab" data-tab="saved-ideas">Saved Ideas</button>
+                <button class="tab" data-tab="history">History</button>
+                <button class="tab" data-tab="code-assistant">Code Assistant</button>
+                <button class="tab" data-tab="learning-assistant">Learning Assistant</button>
+                <button class="tab" data-tab="visual-ideation">Visual Ideation</button>
+                <button class="tab" data-tab="ai-chat">AI Chat</button>
+                <button class="tab" data-tab="user-stats">My Progress</button>
+            </div>
+            
+            <main>
+                <div id="idea-generator-tab" class="tab-content active">
+                    <div class="idea-generator">
+                        <h2>Expand Your Concept</h2>
+                        <p>Enter a concept below and our AI will transform it into a galaxy of creative ideas - building on it, twisting it, remixing it, and showing hidden connections.</p>
+                        
+                        <div class="idea-input-area">
+                            <textarea class="idea-input" id="concept-input" placeholder="Enter your concept here... (e.g., 'A game where players build underwater cities')"></textarea>
+                            <button class="generate-btn" id="generate-btn">Generate Creative Ideas</button>
+                        </div>
+                        
+                        <div class="loading" id="loading" style="display: none;">
+                            <div class="loading-bar"></div>
+                            <p class="loading-text">Brewing creative magic... <span id="loading-message">Connecting to the idea-verse</span></p>
+                        </div>
+                        
+                        <div class="generated-ideas" id="generated-ideas">
+                            <h2>Creative Expansions</h2>
+                            <div class="ideas-container" id="ideas-container">
+                                <!-- Ideas will be inserted here via JavaScript -->
+                            </div>
+                            
+                            <div class="connections-section" id="connections-section">
+                                <h3>Hidden Connections & Synergies</h3>
+                                <div id="connections-content">
+                                    <!-- Connections will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="prompt-library-tab" class="tab-content">
+                    <div class="search-container">
+                        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" class="search-input" placeholder="Search for prompts..." id="search-input">
+                    </div>
+                    
+                    <div class="categories">
+                        <button class="category-btn active" data-category="all">All Prompts</button>
+                        <button class="category-btn" data-category="general">General Development</button>
+                        <button class="category-btn" data-category="specific">Specific Tasks</button>
+                        <button class="category-btn" data-category="constraints">Constraints & Context</button>
+                        <button class="category-btn" data-category="custom">Custom Prompts</button>
+                    </div>
+                    
+                    <section class="category-content" id="general-development">
+                        <div class="category-header">
+                            <h2>General Development & Improvement</h2>
+                        </div>
+                        <div class="prompt-grid">
+                            <!-- Prompts will be inserted here via JavaScript -->
+                        </div>
+                    </section>
+                    
+                    <section class="category-content" id="specific-tasks">
+                        <div class="category-header">
+                            <h2>Specific Tasks & Elements</h2>
+                        </div>
+                        <div class="prompt-grid">
+                            <!-- Prompts will be inserted here via JavaScript -->
+                        </div>
+                    </section>
+                    
+                    <section class="category-content" id="constraints-context">
+                        <div class="category-header">
+                            <h2>Prompts with Constraints & Context</h2>
+                        </div>
+                        <div class="prompt-grid">
+                            <!-- Prompts will be inserted here via JavaScript -->
+                        </div>
+                    </section>
+                    
+                    <section class="category-content" id="custom-prompts" style="display: none;">
+                        <div class="category-header">
+                            <h2>Custom Prompts</h2>
+                        </div>
+                        <div class="prompt-grid" id="custom-prompts-grid">
+                            <!-- Custom prompts will be inserted here -->
+                        </div>
+                    </section>
+                </div>
+                
+                <div id="saved-ideas-tab" class="tab-content">
+                    <h2>Your Saved Ideas</h2>
+                    <div class="saved-ideas-grid" id="saved-ideas-grid">
+                        <!-- Saved ideas will be inserted here -->
+                    </div>
+                    <div class="no-content" id="no-saved-ideas" style="display: none;">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <h3>No saved ideas yet</h3>
+                        <p>Generate some ideas and click the save button to store them here</p>
+                    </div>
+                </div>
+                
+                <div id="history-tab" class="tab-content">
+                    <h2>Your Generation History</h2>
+                    <div class="history-section" id="history-list">
+                        <!-- History items will be inserted here -->
+                    </div>
+                    <div class="no-content" id="no-history" style="display: none;">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <h3>No generation history yet</h3>
+                        <p>Your concept search history will appear here</p>
+                    </div>
+                </div>
+                
+                <div id="code-assistant-tab" class="tab-content">
+                    <div class="code-assistant">
+                        <h2>AI Code Assistant</h2>
+                        <p>Get help writing, reviewing, and improving your code with AI assistance - inspired by Google's Pipet Code Agent.</p>
+                        
+                        <div id="api-key-section" class="api-key-form">
+                            <p>To use the AI Code Assistant, you need to provide an API key. Your key is stored locally and never sent to our servers.</p>
+                            <input type="password" id="api-key-input" class="api-key-input" placeholder="Enter your API key">
+                            <button id="save-api-key" class="api-key-save">Save API Key</button>
+                        </div>
+                        
+                        <div class="code-templates">
+                            <h3>Code Templates</h3>
+                            <button class="template-btn" data-template="function">Basic Function</button>
+                            <button class="template-btn" data-template="class">Class Template</button>
+                            <button class="template-btn" data-template="api">API Endpoint</button>
+                            <button class="template-btn" data-template="algorithm">Simple Algorithm</button>
+                        </div>
+                        
+                        <div class="code-input-area">
+                            <div class="code-options">
+                                <select id="language-select" class="language-select">
+                                    <option value="javascript">JavaScript</option>
+                                    <option value="python">Python</option>
+                                    <option value="java">Java</option>
+                                    <option value="csharp">C#</option>
+                                    <option value="cpp">C++</option>
+                                    <option value="php">PHP</option>
+                                    <option value="typescript">TypeScript</option>
+                                    <option value="html">HTML</option>
+                                    <option value="css">CSS</option>
+                                    <option value="go">Go</option>
+                                    <option value="ruby">Ruby</option>
+                                    <option value="swift">Swift</option>
+                                </select>
+                                
+                                <div class="code-actions">
+                                    <button id="comment-code" class="code-action-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                        Comment
+                                    </button>
+                                    <button id="review-code" class="code-action-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M14 2H6a2 2 0 0 1-2 2v16a2 2 0 0 1 2 2h12a2 2 0 0 1 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                        </svg>
+                                        Review
+                                    </button>
+                                    <button id="optimize-code" class="code-action-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                        Optimize
+                                    </button>
+                                    <button id="name-function" class="code-action-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                        </svg>
+                                        Name Function
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <textarea id="code-editor" class="code-editor" placeholder="Enter your code here..."></textarea>
+                        </div>
+                        
+                        <div id="result-container" class="result-container">
+                            <div class="result-header">
+                                <h3 id="result-title" class="result-title">Result</h3>
+                                <button id="copy-result" class="copy-result-btn">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    Copy
+                                </button>
+                            </div>
+                            <div id="result-content" class="result-content"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="learning-assistant-tab" class="tab-content">
+                    <div class="learning-assistant">
+                        <h2>AI Learning Assistant</h2>
+                        <p>Leverage AI to enhance learning experiences with interactive tutoring, concept explanations, and educational guidance aligned with learning science principles.</p>
+                        
+                        <div class="learning-mode-selector">
+                            <button class="learning-mode-btn active" data-mode="templates">Choose a Template</button>
+                            <button class="learning-mode-btn" data-mode="custom">Custom Learning Session</button>
+                        </div>
+                        
+                        <div id="templates-section">
+                            <h3>Select a Learning Template</h3>
+                            <div class="learning-templates">
+                                <div class="template-card" data-template="test-prep">
+                                    <h3>Test Preparation</h3>
+                                    <p>Interactive practice questions with guidance that adapts to your answers.</p>
+                                    <div class="learning-principles">
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                            </svg>
+                                            Adaptivity
+                                        </span>
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                                            </svg>
+                                            Active Learning
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="template-card" data-template="concept-teach">
+                                    <h3>Concept Explanation</h3>
+                                    <p>Learn concepts with a friendly tutor who asks guiding questions to deepen understanding.</p>
+                                    <div class="learning-principles">
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                                            </svg>
+                                            Active Learning
+                                        </span>
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="18" cy="5" r="3"></circle>
+                                                <circle cx="6" cy="12" r="3"></circle>
+                                                <circle cx="18" cy="19" r="3"></circle>
+                                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                                            </svg>
+                                            Curiosity
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="template-card" data-template="text-relevel">
+                                    <h3>Text Releveling</h3>
+                                    <p>Rewrite texts to better match instructional expectations for a particular grade level.</p>
+                                    <div class="learning-principles">
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                            </svg>
+                                            Adaptivity
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="template-card" data-template="learning-activity">
+                                    <h3>Learning Activity Guide</h3>
+                                    <p>Step-by-step guidance through close reading and analysis of texts using established protocols.</p>
+                                    <div class="learning-principles">
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                                            </svg>
+                                            Active Learning
+                                        </span>
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                            </svg>
+                                            Cognitive Load
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="template-card" data-template="homework-help">
+                                    <h3>Homework Helper</h3>
+                                    <p>Get assistance with homework problems through answers, guidance, or feedback on your work.</p>
+                                    <div class="learning-principles">
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                                            </svg>
+                                            Active Learning
+                                        </span>
+                                        <span class="principle-tag">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M14 9V5a3 3 0 0 1-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                                            </svg>
+                                            Metacognition
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="custom-learning-section" style="display: none;">
+                            <h3>Custom Learning Session</h3>
+                            <p>Design your own learning session with a specific focus and approach.</p>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="learning-system-instructions">System Instructions</label>
+                                <textarea class="form-input" id="learning-system-instructions" rows="4" placeholder="Enter system instructions for the learning assistant..."></textarea>
+                                <small>Define how the AI tutor should behave and what approach it should take.</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="learning-focus">Learning Topic</label>
+                                <input type="text" class="form-input" id="learning-focus" placeholder="What topic would you like to explore?">
+                            </div>
+                            
+                            <button class="generate-btn" id="start-custom-learning">
+                                Start Learning Session
+                            </button>
+                        </div>
+                        
+                        <div id="learning-chat-section" style="display: none;">
+                            <div class="learning-chat-container">
+                                <div class="chat-header">
+                                    <h3 id="learning-chat-title">Learning Assistant</h3>
+                                    <button id="reset-learning-chat" class="chat-action-btn">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 2v6"></path>
+                                            <path d="M3 13a9 9 0 1 0 3-7.7L3 8"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="chat-messages" id="learning-messages">
+                                    <!-- Messages will be inserted here -->
+                                </div>
+                                <div class="chat-input-container">
+                                    <textarea id="learning-input" class="chat-input" placeholder="Type your message..."></textarea>
+                                    <button id="send-learning-message" class="send-btn">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="visual-ideation-tab" class="tab-content">
+                    <div class="visual-ideation">
+                        <h2>Visual Idea Generation</h2>
+                        <p>Upload an image and let our AI generate creative ideas, insights, and connections based on the visual content. Leverage multimodal AI to unlock new perspectives and inspirations.</p>
+                        
+                        <div id="image-upload-container" class="image-upload-container">
+                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <p>Drag and drop an image here or click to upload</p>
+                            <input type="file" id="image-input" class="image-input" accept="image/*">
+                            <button id="upload-btn" class="upload-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                                Upload Image
+                            </button>
+                        </div>
+                        
+                        <div id="image-preview-container" class="image-preview-container">
+                            <img id="image-preview" class="image-preview" src="" alt="Preview">
+                            <button id="remove-image-btn" class="upload-btn" style="background-color: var(--error);">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                                Remove Image
+                            </button>
+                        </div>
+                        
+                        <div id="prompt-strategy-section" class="prompt-strategy-section">
+                            <h3>Select a Prompt Strategy</h3>
+                            <p>Choose how you want the AI to analyze and respond to your image:</p>
+                            
+                            <div class="prompt-strategy-grid">
+                                <div class="strategy-card" data-strategy="creative-ideas">
+                                    <h3>Creative Ideas</h3>
+                                    <p>Generate 5 innovative ideas inspired by the image that could be developed into projects or concepts. Each idea should include a title and a brief description of how it could be developed into a project or concept.</p>
+                                </div>
+                                
+                                <div class="strategy-card" data-strategy="detailed-analysis">
+                                    <h3>Detailed Analysis</h3>
+                                    <p>Break down the image step-by-step and analyze its key elements, themes, colors, and composition. Explain potential meanings or interpretations.</p>
+                                </div>
+                                
+                                <div class="strategy-card" data-strategy="story-generation">
+                                    <h3>Story Generation</h3>
+                                    <p>Create a compelling short story (about 400 words) based on the image. Include characters, setting, conflict, and resolution.</p>
+                                </div>
+                                
+                                <div class="strategy-card" data-strategy="design-feedback">
+                                    <h3>Design Feedback</h3>
+                                    <p>Provide constructive feedback on the design aspects of the image. Analyze composition, color usage, visual hierarchy, balance, and overall effectiveness.</p>
+                                </div>
+                                
+                                <div class="strategy-card" data-strategy="metaphorical-connections">
+                                    <h3>Metaphorical Connections</h3>
+                                    <p>Draw 5 unexpected connections between the image and different domains (business, science, art, psychology, technology, etc.). Explain how each metaphorical connection could inspire innovation or new thinking.</p>
+                                </div>
+                                
+                                <div class="strategy-card" data-strategy="custom-prompt">
+                                    <h3>Custom Prompt</h3>
+                                    <p>Write your own specific prompt to guide the AI in analyzing the image.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="custom-prompt-container" class="custom-prompt-container">
+                                <h4>Enter Your Custom Prompt</h4>
+                                <p>Be specific about what you want the AI to analyze or generate based on the image.</p>
+                                <textarea id="custom-prompt-textarea" class="custom-prompt-textarea" placeholder="Example: Generate 3 business ideas inspired by this image that combine sustainability and technology."></textarea>
+                            </div>
+                            
+                            <button id="visual-generate-btn" class="visual-generate-btn">Generate Visual Ideas</button>
+                        </div>
+                        
+                        <div id="visual-result-container" class="visual-result-container">
+                            <div class="visual-result-header">
+                                <h3 class="visual-result-title">Generated Ideas</h3>
+                                <div class="visual-result-actions">
+                                    <button id="visual-copy-btn" class="visual-result-action-btn">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                        Copy
+                                    </button>
+                                    <button id="visual-save-btn" class="visual-result-action-btn">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                            <polyline points="7 3 7 8 15 8"></polyline>
+                                        </svg>
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="visual-result-content" class="visual-result-content">
+                                <!-- Results will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="ai-chat-tab" class="tab-content">
+                    <div class="ai-chat-assistant">
+                        <h2>AI Chat Assistant</h2>
+                        <p>Have a conversation with your personal AI assistant. Ask questions, get creative help, explore ideas, and more.</p>
+                        
+                        <div class="ai-chat-options">
+                            <div class="ai-chat-options-title">Quick Prompts:</div>
+                            <button class="ai-chat-option-btn" data-prompt="Help me brainstorm creative ideas for a mobile app that helps people reduce food waste.">Brainstorm App Ideas</button>
+                            <button class="ai-chat-option-btn" data-prompt="I need help coming up with a name for my new business that sells handmade leather goods.">Name My Business</button>
+                            <button class="ai-chat-option-btn" data-prompt="Explain the concept of design thinking in simple terms.">Explain a Concept</button>
+                            <button class="ai-chat-option-btn" data-prompt="Give me 5 creative writing prompts that involve time travel.">Creative Prompts</button>
+                        </div>
+                        
+                        <div class="ai-chat-container">
+                            <div class="ai-chat-header">
+                                <h3>Chat with AI Assistant</h3>
+                                <button id="reset-ai-chat" class="chat-action-btn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 2v6"></path>
+                                        <path d="M3 13a9 9 0 1 0 3-7.7L3 8"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="ai-chat-messages" id="ai-chat-messages">
+                                <div class="ai-message assistant-message">
+                                    Hello! I'm your AI assistant. How can I help you today? You can ask me questions, get creative help, or just chat about ideas.
+                                </div>
+                            </div>
+                            <div class="ai-chat-input-container">
+                                <textarea id="ai-chat-input" class="ai-chat-input" placeholder="Type your message here..."></textarea>
+                                <button id="ai-send-message" class="ai-send-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="user-stats-tab" class="tab-content">
+                    <h2>Your Creative Journey</h2>
+                    <p class="subtitle">Track your progress and achievements as you explore creative ideation</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🚀</div>
+                            <div class="stat-value" id="total-ideas-generated">0</div>
+                            <div class="stat-label">Ideas Generated</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">💡</div>
+                            <div class="stat-value" id="total-ideas-saved">0</div>
+                            <div class="stat-label">Ideas Saved</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-value" id="total-achievements">0</div>
+                            <div class="stat-label">Achievements Unlocked</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-value" id="creativity-score">0</div>
+                            <div class="stat-label">Creativity Score</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">🔄</div>
+                            <div class="stat-value" id="current-streak">0</div>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">🌟</div>
+                            <div class="stat-value" id="highest-level">1</div>
+                            <div class="stat-label">Highest Level</div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievements-showcase">
+                        <h3>Your Achievements</h3>
+                        <div class="prompt-grid" id="achievements-grid">
+                            <!-- Achievements will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="action-btn" id="add-prompt-btn" title="Add Custom Prompt">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+            <button class="action-btn" id="export-btn" title="Export Ideas" style="display: none;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <button class="theme-toggle" id="theme-toggle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </button>
+        
+        <div class="toast-container" id="toast-container">
+            <!-- Toast notifications will be inserted here -->
+        </div>
+
+        <script>
+            // Data Models and Storage
+            const promptData = {
+                general: [
+                    "Innovate the game / app",
+                    "Refine the game / app",
+                    "Polish the game / app",
+                    "Make the game / app better",
+                    "Write better code for the game / app",
+                    "Optimize the game / app performance",
+                    "Improve the user experience (UX) of the game / app",
+                    "Enhance the design of the game / app",
+                    "Refactor the codebase"
+                ],
+                specific: [
+                    "Generate code for [specific feature, e.g., player movement, a UI element]",
+                    "Implement [specific algorithm, e.g., pathfinding, a sorting algorithm]",
+                    "Debug the following code snippet: [insert code]",
+                    "Write unit tests for [specific function or module]",
+                    "Design a [game mechanic, e.g., a crafting system, a combat system]",
+                    "Create a compelling backstory for [character name or type]",
+                    "Generate ideas for [game levels, app features, character abilities]",
+                    "Outline the structure of [a specific part of the code, e.g., the networking layer]",
+                    "Brainstorm different solutions for [a specific technical challenge]",
+                    "Add error handling to [specific code section]",
+                    "Improve the efficiency of [specific function or loop]",
+                    "Create [a specific visual asset, e.g., a character sprite, a button icon]",
+                    "Develop a [specific sound effect or background music track]"
+                ],
+                constraints: [
+                    "Write code in [programming language] for [task]",
+                    "Generate a [list, table, code snippet] in markdown format",
+                    "Explain this code in simple terms: [insert code]",
+                    "Act as an experienced [role, e.g., game designer, mobile developer] and provide feedback on [aspect of the game/app]",
+                    "Based on the following description, create a [game concept, app idea]: [insert description]",
+                    "Modify the existing code to [add, change, remove] [specific functionality]",
+                    "Ensure the code adheres to [specific coding standard or pattern]",
+                    "Create a prompt for generating [specific asset type] with [specific style or theme]"
+                ],
+                custom: []
+            };
+
+            const StorageManager = {
+                save: function(key, data) {
+                    localStorage.setItem(key, JSON.stringify(data));
+                },
+                
+                get: function(key) {
+                    const data = localStorage.getItem(key);
+                    return data ? JSON.parse(data) : null;
+                },
+                
+                init: function() {
+                    if (!this.get('customPrompts')) {
+                        this.save('customPrompts', []);
+                    } else {
+                        promptData.custom = this.get('customPrompts');
+                    }
+                    
+                    if (!this.get('savedIdeas')) {
+                        this.save('savedIdeas', []);
+                    }
+                    
+                    if (!this.get('conceptHistory')) {
+                        this.save('conceptHistory', []);
+                    }
+                }
+            };
+            
+            // UI Utilities
+            const ToastManager = {
+                create: function(message, type = 'info') {
+                    const container = document.getElementById('toast-container');
+                    const toast = document.createElement('div');
+                    toast.className = `toast toast-${type}`;
+                    
+                    let icon = '';
+                    if (type === 'success') {
+                        icon = `<span class="toast-icon">✓</span>`;
+                    } else if (type === 'info') {
+                        icon = `<span class="toast-icon">ℹ</span>`;
+                    }
+                    
+                    toast.innerHTML = `${icon}${message}`;
+                    container.appendChild(toast);
+                    
+                    setTimeout(() => {
+                        container.removeChild(toast);
+                    }, 3000);
+                }
+            };
+            
+            const ModalManager = {
+                open: function(modalId) {
+                    const modal = document.getElementById(modalId);
+                    modal.classList.add('active');
+                },
+                
+                close: function(modalId) {
+                    const modal = document.getElementById(modalId);
+                    modal.classList.remove('active');
+                }
+            };
+            
+            const loadingMessages = [
+                "Connecting to the idea-verse",
+                "Brewing creative magic",
+                "Mining creative diamonds",
+                "Exploring conceptual galaxies",
+                "Extracting innovation particles",
+                "Assembling thought experiments",
+                "Harvesting creative energy",
+                "Distilling pure imagination"
+            ];
+            
+            function cycleLoadingMessages() {
+                const loadingMessageElement = document.getElementById('loading-message');
+                let messageIndex = 0;
+                
+                return setInterval(() => {
+                    messageIndex = (messageIndex + 1) % loadingMessages.length;
+                    loadingMessageElement.textContent = loadingMessages[messageIndex];
+                }, 2000);
+            }
+            
+            // Prompt Library Functions
+            function generatePromptCards() {
+                const generalGrid = document.querySelector('#general-development .prompt-grid');
+                const specificGrid = document.querySelector('#specific-tasks .prompt-grid');
+                const constraintsGrid = document.querySelector('#constraints-context .prompt-grid');
+                const customGrid = document.querySelector('#custom-prompts-grid');
+                
+                generalGrid.innerHTML = '';
+                specificGrid.innerHTML = '';
+                constraintsGrid.innerHTML = '';
+                customGrid.innerHTML = '';
+                
+                promptData.general.forEach(prompt => {
+                    const card = createPromptCard(prompt, false);
+                    generalGrid.appendChild(card);
+                });
+                
+                promptData.specific.forEach(prompt => {
+                    const card = createPromptCard(prompt, false);
+                    specificGrid.appendChild(card);
+                });
+                
+                promptData.constraints.forEach(prompt => {
+                    const card = createPromptCard(prompt, false);
+                    constraintsGrid.appendChild(card);
+                });
+                
+                if (promptData.custom.length > 0) {
+                    document.getElementById('custom-prompts').style.display = 'block';
+                    promptData.custom.forEach((prompt, index) => {
+                        const card = createPromptCard(prompt, true, index);
+                        customGrid.appendChild(card);
+                    });
+                } else {
+                    document.getElementById('custom-prompts').style.display = 'none';
+                }
+            }
+            
+            function createPromptCard(promptText, isCustom = false, customIndex = -1) {
+                const card = document.createElement('div');
+                card.className = 'prompt-card';
+                card.dataset.prompt = promptText.toLowerCase();
+                
+                const textDiv = document.createElement('div');
+                textDiv.className = 'prompt-text';
+                textDiv.textContent = promptText;
+                
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'prompt-card-actions';
+                
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'card-btn';
+                copyBtn.title = 'Copy to clipboard';
+                copyBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                `;
+                
+                const tooltip = document.createElement('span');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = 'Copied!';
+                
+                copyBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navigator.clipboard.writeText(promptText);
+                    tooltip.classList.add('show');
+                    setTimeout(() => {
+                        tooltip.classList.remove('show');
+                    }, 1500);
+                    
+                    ToastManager.create('Prompt copied to clipboard', 'success');
+                });
+                
+                const useBtn = document.createElement('button');
+                useBtn.className = 'card-btn';
+                useBtn.title = 'Use this prompt';
+                useBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 10 4 15 9 20"></polyline>
+                        <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                    </svg>
+                `;
+                
+                useBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    document.getElementById('concept-input').value = promptText;
+                    document.querySelector('.tab[data-tab="idea-generator"]').click();
+                    document.getElementById('concept-input').focus();
+                });
+                
+                copyBtn.appendChild(tooltip);
+                actionsDiv.appendChild(useBtn);
+                actionsDiv.appendChild(copyBtn);
+                
+                if (isCustom) {
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'card-btn';
+                    deleteBtn.title = 'Delete prompt';
+                    deleteBtn.innerHTML = `
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                    `;
+                    
+                    deleteBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        promptData.custom.splice(customIndex, 1);
+                        StorageManager.save('customPrompts', promptData.custom);
+                        generatePromptCards();
+                        ToastManager.create('Custom prompt deleted', 'info');
+                    });
+                    
+                    actionsDiv.appendChild(deleteBtn);
+                }
+                
+                card.appendChild(textDiv);
+                card.appendChild(actionsDiv);
+                
+                return card;
+            }
+            
+            // Idea Generator Functions
+            function createIdeaCard(idea, index) {
+                const ideaCard = document.createElement('div');
+                ideaCard.className = 'idea-card';
+                ideaCard.setAttribute('data-category', idea.category.toLowerCase());
+                
+                const ideaNumber = document.createElement('div');
+                ideaNumber.className = 'idea-number';
+                ideaNumber.textContent = index + 1;
+                
+                const categorySpan = document.createElement('span');
+                categorySpan.style.fontSize = '0.8rem';
+                categorySpan.style.color = 'var(--secondary)';
+                categorySpan.style.fontWeight = 'bold';
+                categorySpan.textContent = idea.category;
+                
+                const title = document.createElement('h3');
+                title.textContent = idea.title;
+                
+                const description = document.createElement('p');
+                description.textContent = idea.description;
+                
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'idea-actions';
+                
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'idea-action-btn';
+                copyBtn.title = 'Copy to clipboard';
+                copyBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                `;
+                
+                copyBtn.addEventListener('click', function() {
+                    const textToCopy = `${idea.title}\n\n${idea.description}`;
+                    navigator.clipboard.writeText(textToCopy);
+                    ToastManager.create('Idea copied to clipboard', 'success');
+                });
+                
+                const saveBtn = document.createElement('button');
+                saveBtn.className = 'idea-action-btn';
+                saveBtn.title = 'Save this idea';
+                saveBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                `;
+                
+                saveBtn.addEventListener('click', function() {
+                    const savedIdeas = StorageManager.get('savedIdeas') || [];
+                    
+                    const alreadySaved = savedIdeas.some(savedIdea => 
+                        savedIdea.title === idea.title && 
+                        savedIdea.description === idea.description
+                    );
+                    
+                    if (!alreadySaved) {
+                        const ideaToSave = {
+                            ...idea,
+                            savedAt: new Date().toISOString()
+                        };
+                        
+                        savedIdeas.push(ideaToSave);
+                        StorageManager.save('savedIdeas', savedIdeas);
+                        ToastManager.create('Idea saved successfully', 'success');
+                        
+                        if (document.getElementById('saved-ideas-tab').classList.contains('active')) {
+                            renderSavedIdeas();
+                        }
+                    } else {
+                        ToastManager.create('This idea is already saved', 'info');
+                    }
+                });
+                
+                actionsDiv.appendChild(copyBtn);
+                actionsDiv.appendChild(saveBtn);
+                
+                ideaCard.appendChild(ideaNumber);
+                ideaCard.appendChild(categorySpan);
+                ideaCard.appendChild(title);
+                ideaCard.appendChild(description);
+                ideaCard.appendChild(actionsDiv);
+                
+                return ideaCard;
+            }
+            
+            function addToHistory(concept, ideas) {
+                const history = StorageManager.get('conceptHistory') || [];
+                
+                const historyItem = {
+                    concept,
+                    timestamp: new Date().toISOString(),
+                    ideas
+                };
+                
+                history.unshift(historyItem);
+                
+                if (history.length > 20) {
+                    history.pop();
+                }
+                
+                StorageManager.save('conceptHistory', history);
+                
+                if (document.getElementById('history-tab').classList.contains('active')) {
+                    renderHistory();
+                }
+            }
+            
+            function renderSavedIdeas() {
+                const savedIdeasGrid = document.getElementById('saved-ideas-grid');
+                const noSavedIdeas = document.getElementById('no-saved-ideas');
+                
+                savedIdeasGrid.innerHTML = '';
+                
+                const savedIdeas = StorageManager.get('savedIdeas') || [];
+                
+                if (savedIdeas.length > 0) {
+                    savedIdeasGrid.style.display = 'grid';
+                    noSavedIdeas.style.display = 'none';
+                    
+                    savedIdeas.sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt));
+                    
+                    savedIdeas.forEach((idea, index) => {
+                        const card = createSavedIdeaCard(idea, index);
+                        savedIdeasGrid.appendChild(card);
+                    });
+                } else {
+                    savedIdeasGrid.style.display = 'none';
+                    noSavedIdeas.style.display = 'block';
+                }
+            }
+            
+            function createSavedIdeaCard(idea, index) {
+                const card = createIdeaCard(idea, index);
+                
+                const actionsDiv = card.querySelector('.idea-actions');
+                const saveBtn = actionsDiv.children[1];
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'idea-action-btn';
+                deleteBtn.title = 'Delete this saved idea';
+                deleteBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                `;
+                
+                deleteBtn.addEventListener('click', function() {
+                    const savedIdeas = StorageManager.get('savedIdeas') || [];
+                    
+                    const ideaIndex = savedIdeas.findIndex(savedIdea => 
+                        savedIdea.title === idea.title && 
+                        savedIdea.description === idea.description
+                    );
+                    
+                    if (ideaIndex !== -1) {
+                        savedIdeas.splice(ideaIndex, 1);
+                        StorageManager.save('savedIdeas', savedIdeas);
+                        renderSavedIdeas();
+                        ToastManager.create('Idea removed from saved items', 'info');
+                    }
+                });
+                
+                actionsDiv.replaceChild(deleteBtn, saveBtn);
+                
+                if (idea.savedAt) {
+                    const savedDate = document.createElement('div');
+                    savedDate.style.fontSize = '0.7rem';
+                    savedDate.style.color = 'var(--light-text)';
+                    savedDate.style.marginTop = '0.5rem';
+                    
+                    const date = new Date(idea.savedAt);
+                    savedDate.textContent = `Saved on ${date.toLocaleDateString()}`;
+                    
+                    card.appendChild(savedDate);
+                }
+                
+                return card;
+            }
+            
+            function renderHistory() {
+                const historyList = document.getElementById('history-list');
+                const noHistory = document.getElementById('no-history');
+                
+                historyList.innerHTML = '';
+                
+                const history = StorageManager.get('conceptHistory') || [];
+                
+                if (history.length > 0) {
+                    historyList.style.display = 'block';
+                    noHistory.style.display = 'none';
+                    
+                    history.forEach(item => {
+                        const historyItem = document.createElement('div');
+                        historyItem.className = 'history-item';
+                        
+                        const date = new Date(item.timestamp);
+                        const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                        
+                        historyItem.innerHTML = `
+                            <div class="history-text">${item.concept}</div>
+                            <div class="history-date">${formattedDate}</div>
+                        `;
+                        
+                        historyItem.addEventListener('click', function() {
+                            document.getElementById('concept-input').value = item.concept;
+                            
+                            document.querySelector('.tab[data-tab="idea-generator"]').click();
+                            
+                            document.getElementById('concept-input').focus();
+                        });
+                        
+                        historyList.appendChild(historyItem);
+                    });
+                } else {
+                    historyList.style.display = 'none';
+                    noHistory.style.display = 'block';
+                }
+            }
+            
+            function exportIdeas(format) {
+                const ideasContainer = document.getElementById('ideas-container');
+                const connectionsContent = document.getElementById('connections-content');
+                
+                if (!ideasContainer.children.length) {
+                    ToastManager.create('No ideas to export', 'info');
+                    return;
+                }
+                
+                let exportContent = '';
+                let filename = 'creative-ideas';
+                
+                const ideaCards = ideasContainer.querySelectorAll('.idea-card');
+                const connections = connectionsContent.textContent;
+                
+                if (format === 'text') {
+                    ideaCards.forEach((card, index) => {
+                        const title = card.querySelector('h3').textContent;
+                        const category = card.querySelector('span').textContent;
+                        const description = card.querySelector('p').textContent;
+                        
+                        exportContent += `${index + 1}. ${title} (${category})\n${description}\n\n`;
+                    });
+                    
+                    exportContent += `\nConnections & Synergies:\n${connections}`;
+                    filename += '.txt';
+                } else if (format === 'json') {
+                    const ideasArray = [];
+                    
+                    ideaCards.forEach(card => {
+                        const title = card.querySelector('h3').textContent;
+                        const category = card.querySelector('span').textContent;
+                        const description = card.querySelector('p').textContent;
+                        
+                        ideasArray.push({
+                            title,
+                            category,
+                            description
+                        });
+                    });
+                    
+                    const jsonData = {
+                        ideas: ideasArray,
+                        connections
+                    };
+                    
+                    exportContent = JSON.stringify(jsonData, null, 2);
+                    filename += '.json';
+                } else if (format === 'markdown') {
+                    exportContent = '# Creative Ideas\n\n';
+                    
+                    ideaCards.forEach((card, index) => {
+                        const title = card.querySelector('h3').textContent;
+                        const category = card.querySelector('span').textContent;
+                        const description = card.querySelector('p').textContent;
+                        
+                        exportContent += `## ${index + 1}. ${title}\n\n`;
+                        exportContent += `**Category:** ${category}\n\n`;
+                        exportContent += `${description}\n\n`;
+                    });
+                    
+                    exportContent += `## Connections & Synergies\n\n${connections}`;
+                    filename += '.md';
+                }
+                
+                const blob = new Blob([exportContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                ToastManager.create(`Ideas exported as ${format}`, 'success');
+                ModalManager.close('export-modal');
+            }
+            
+            // Event Listeners
+            document.addEventListener('DOMContentLoaded', function() {
+                StorageManager.init();
+                generatePromptCards();
+                
+                const themeToggle = document.getElementById('theme-toggle');
+                
+                if (themeToggle) {
+                    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                        document.body.classList.add('dark-mode');
+                        themeToggle.innerHTML = `
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        `;
+                    }
+                    
+                    themeToggle.addEventListener('click', function() {
+                        document.body.classList.toggle('dark-mode');
+                        
+                        if (document.body.classList.contains('dark-mode')) {
+                            this.innerHTML = `
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                            `;
+                        } else {
+                            this.innerHTML = `
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            `;
+                        }
+                    });
+                }
+                
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        const tabId = this.dataset.tab;
+                        document.querySelectorAll('.tab-content').forEach(content => {
+                            content.classList.remove('active');
+                        });
+                        
+                        const tabContent = document.getElementById(`${tabId}-tab`);
+                        if (tabContent) {
+                            tabContent.classList.add('active');
+                            
+                            if (tabId === 'saved-ideas') {
+                                renderSavedIdeas();
+                            } else if (tabId === 'history') {
+                                renderHistory();
+                            } else if (tabId === 'idea-generator') {
+                                const exportBtn = document.getElementById('export-btn');
+                                if (exportBtn && document.getElementById('generated-ideas').style.display === 'block') {
+                                    exportBtn.style.display = 'flex';
+                                }
+                            } else {
+                                const exportBtn = document.getElementById('export-btn');
+                                if (exportBtn) {
+                                    exportBtn.style.display = 'none';
+                                }
+                            }
+                        }
+                    });
+                });
+                
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        const searchTerm = this.value.toLowerCase();
+                        
+                        document.querySelectorAll('.prompt-card').forEach(card => {
+                            const promptText = card.dataset.prompt;
+                            if (promptText && promptText.includes(searchTerm)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                        
+                        document.querySelectorAll('.category-content').forEach(section => {
+                            const visibleCards = section.querySelectorAll('.prompt-card[style="display: block;"]');
+                            if (visibleCards.length === 0) {
+                                section.style.display = 'none';
+                            } else {
+                                section.style.display = 'block';
+                            }
+                        });
+                    });
+                }
+                
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        const category = this.dataset.category;
+                        const generalDev = document.getElementById('general-development');
+                        const specificTasks = document.getElementById('specific-tasks');
+                        const constraintsContext = document.getElementById('constraints-context');
+                        const customPrompts = document.getElementById('custom-prompts');
+                        
+                        if (category === 'all') {
+                            if (generalDev) generalDev.style.display = 'block';
+                            if (specificTasks) specificTasks.style.display = 'block';
+                            if (constraintsContext) constraintsContext.style.display = 'block';
+                            if (customPrompts) customPrompts.style.display = promptData.custom.length > 0 ? 'block' : 'none';
+                        } else if (category === 'general') {
+                            if (generalDev) generalDev.style.display = 'block';
+                            if (specificTasks) specificTasks.style.display = 'none';
+                            if (constraintsContext) constraintsContext.style.display = 'none';
+                            if (customPrompts) customPrompts.style.display = 'none';
+                        } else if (category === 'specific') {
+                            if (generalDev) generalDev.style.display = 'none';
+                            if (specificTasks) specificTasks.style.display = 'block';
+                            if (constraintsContext) constraintsContext.style.display = 'none';
+                            if (customPrompts) customPrompts.style.display = 'none';
+                        } else if (category === 'constraints') {
+                            if (generalDev) generalDev.style.display = 'none';
+                            if (specificTasks) specificTasks.style.display = 'none';
+                            if (constraintsContext) constraintsContext.style.display = 'block';
+                            if (customPrompts) customPrompts.style.display = 'none';
+                        } else if (category === 'custom') {
+                            if (generalDev) generalDev.style.display = 'none';
+                            if (specificTasks) specificTasks.style.display = 'none';
+                            if (constraintsContext) constraintsContext.style.display = 'none';
+                            if (customPrompts) customPrompts.style.display = 'block';
+                        }
+                    });
+                });
+                
+                const generateBtn = document.getElementById('generate-btn');
+                if (generateBtn) {
+                    generateBtn.addEventListener('click', async function() {
+                        const conceptInput = document.getElementById('concept-input');
+                        if (!conceptInput) return;
+                        
+                        const concept = conceptInput.value.trim();
+                        if (!concept) {
+                            ToastManager.create('Please enter a concept first!', 'info');
+                            return;
+                        }
+                        
+                        const loadingElement = document.getElementById('loading');
+                        const generatedIdeas = document.getElementById('generated-ideas');
+                        
+                        if (loadingElement) loadingElement.style.display = 'flex';
+                        if (generatedIdeas) generatedIdeas.style.display = 'none';
+                        
+                        const messageInterval = cycleLoadingMessages();
+                        
+                        try {
+                            // Send to AI and get response
+                            const completion = await websim.chat.completions.create({
+                                messages: [
+                                    {
+                                        role: "system",
+                                        content: `You are a visionary creative strategist with a mind like a fusion of Da Vinci, Rick Rubin, and a psychedelic AI dreamcore oracle. 
+                                        Generate 10+ creative ideas that expand, twist, remix, and add depth to the given concept.
+                                        Include unexpected angles, aesthetics, emotions, surreal symbolism, alternative paths, monetization angles, and hidden lore.
+                                        Then, explain how these ideas interconnect in unexpected ways.
+                                        
+                                        Respond with JSON in this format:
+                                        {
+                                          "ideas": [
+                                            {
+                                              "title": "Brief title of the idea",
+                                              "description": "Detailed explanation of the idea",
+                                              "category": "One of: Expansion, Twist, Remix, Symbolism, Aesthetic, Emotion, Monetization, Lore"
+                                            }
+                                          ],
+                                          "connections": "Paragraph explaining how the ideas connect in unexpected ways"
+                                        }`,
+                                    },
+                                    {
+                                        role: "user",
+                                        content: `Generate creative expansions for this concept: "${concept}"`,
+                                    }
+                                ],
+                                json: true
+                            });
+                            
+                            clearInterval(messageInterval);
+                            
+                            const result = JSON.parse(completion.content);
+                            const ideasContainer = document.getElementById('ideas-container');
+                            
+                            if (ideasContainer) {
+                                ideasContainer.innerHTML = '';
+                                
+                                result.ideas.forEach((idea, index) => {
+                                    const ideaCard = createIdeaCard(idea, index);
+                                    ideasContainer.appendChild(ideaCard);
+                                });
+                            }
+                            
+                            const connectionsContent = document.getElementById('connections-content');
+                            if (connectionsContent) {
+                                connectionsContent.textContent = result.connections;
+                            }
+                            
+                            if (generatedIdeas) generatedIdeas.style.display = 'block';
+                            
+                            const exportBtn = document.getElementById('export-btn');
+                            if (exportBtn) exportBtn.style.display = 'flex';
+                            
+                            addToHistory(concept, result.ideas);
+                            
+                        } catch (error) {
+                            console.error('Error generating ideas:', error);
+                            ToastManager.create('There was an error generating ideas. Please try again.', 'error');
+                            clearInterval(messageInterval);
+                        } finally {
+                            if (loadingElement) loadingElement.style.display = 'none';
+                        }
+                    });
+                }
+                
+                // Visual Ideation Functionality
+                const imageUploadContainer = document.getElementById('image-upload-container');
+                const imageInput = document.getElementById('image-input');
+                const uploadBtn = document.getElementById('upload-btn');
+                const imagePreviewContainer = document.getElementById('image-preview-container');
+                const imagePreview = document.getElementById('image-preview');
+                const removeImageBtn = document.getElementById('remove-image-btn');
+                const promptStrategySection = document.getElementById('prompt-strategy-section');
+                const strategyCards = document.querySelectorAll('.strategy-card');
+                const customPromptContainer = document.getElementById('custom-prompt-container');
+                const customPromptTextarea = document.getElementById('custom-prompt-textarea');
+                const visualGenerateBtn = document.getElementById('visual-generate-btn');
+                const visualResultContainer = document.getElementById('visual-result-container');
+                const visualResultContent = document.getElementById('visual-result-content');
+                const visualCopyBtn = document.getElementById('visual-copy-btn');
+                const visualSaveBtn = document.getElementById('visual-save-btn');
+                
+                // Store the uploaded image data URL
+                let uploadedImageDataUrl = '';
+                
+                // Add event listeners only if elements exist
+                if (uploadBtn && imageInput) {
+                    uploadBtn.addEventListener('click', function() {
+                        imageInput.click();
+                    });
+                }
+                
+                if (imageInput) {
+                    imageInput.addEventListener('change', function(event) {
+                        if (event.target.files && event.target.files[0]) {
+                            handleImageUpload(event.target.files[0]);
+                        }
+                    });
+                }
+                
+                // Initialize the Learning Assistant section if tab is active
+                if (document.getElementById('learning-assistant-tab') && document.getElementById('learning-assistant-tab').classList.contains('active')) {
+                    // Initialize all learning mode buttons with null checks
+                    document.querySelectorAll('.learning-mode-btn').forEach(btn => {
+                        if (btn) {
+                            btn.addEventListener('click', function() {
+                                document.querySelectorAll('.learning-mode-btn').forEach(b => b.classList.remove('active'));
+                                this.classList.add('active');
+                                
+                                const mode = this.dataset.mode;
+                                const templatesSection = document.getElementById('templates-section');
+                                const customLearningSection = document.getElementById('custom-learning-section');
+                                const learningChatSection = document.getElementById('learning-chat-section');
+                                
+                                if (mode === 'templates') {
+                                    if (templatesSection) templatesSection.style.display = 'block';
+                                    if (customLearningSection) customLearningSection.style.display = 'none';
+                                } else if (mode === 'custom') {
+                                    if (templatesSection) templatesSection.style.display = 'none';
+                                    if (customLearningSection) customLearningSection.style.display = 'block';
+                                }
+                                
+                                if (learningChatSection) learningChatSection.style.display = 'none';
+                            });
+                        }
+                    });
+                    
+                    // Continue with other initializations...
+                }
+                
+                // Display welcome toast after a short delay
+                setTimeout(() => {
+                    ToastManager.create('Welcome to the enhanced Creative Idea Expander!', 'info');
+                }, 1000);
+            });
+            
+            // Helper functions with null checks
+            function handleImageUpload(file) {
+                const imagePreview = document.getElementById('image-preview');
+                const imagePreviewContainer = document.getElementById('image-preview-container');
+                const imageUploadContainer = document.getElementById('image-upload-container');
+                const promptStrategySection = document.getElementById('prompt-strategy-section');
+                
+                if (!file || !file.type.startsWith('image/') || 
+                    !imagePreview || !imagePreviewContainer || 
+                    !imageUploadContainer || !promptStrategySection) {
+                    ToastManager.create('Please select a valid image file or check if UI elements are available', 'info');
+                    return;
+                }
+                    
+                const reader = new FileReader();
+                    
+                reader.onload = function(e) {
+                    uploadedImageDataUrl = e.target.result;
+                    imagePreview.src = uploadedImageDataUrl;
+                    imagePreviewContainer.style.display = 'flex';
+                    imageUploadContainer.style.display = 'none';
+                    promptStrategySection.style.display = 'block';
+                };
+                    
+                reader.readAsDataURL(file);
+            }
+            
+            // AI Chat Assistant
+            document.addEventListener('DOMContentLoaded', function() {
+                // AI Chat Assistant Implementation
+                const aiChatInput = document.getElementById('ai-chat-input');
+                const aiSendButton = document.getElementById('ai-send-message');
+                const aiChatMessages = document.getElementById('ai-chat-messages');
+                const resetAiChatButton = document.getElementById('reset-ai-chat');
+                const aiChatOptionButtons = document.querySelectorAll('.ai-chat-option-btn');
+                
+                // Conversation history for the AI chat
+                let conversationHistory = [
+                    {
+                        role: "assistant",
+                        content: "Hello! I'm your AI assistant. How can I help you today? You can ask me questions, get creative help, or just chat about ideas."
+                    }
+                ];
+                
+                // Function to add a message to the chat UI
+                function addMessageToChat(content, role) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `ai-message ${role === 'user' ? 'user-message' : 'assistant-message'}`;
+                    messageDiv.textContent = content;
+                    aiChatMessages.appendChild(messageDiv);
+                    aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+                }
+                
+                // Function to add "AI is thinking" indicator
+                function showThinking() {
+                    const thinkingDiv = document.createElement('div');
+                    thinkingDiv.className = 'ai-thinking';
+                    thinkingDiv.id = 'ai-thinking-indicator';
+                    thinkingDiv.innerHTML = `
+                        <span>AI is thinking</span>
+                        <div class="ai-thinking-dots">
+                            <div class="ai-thinking-dot"></div>
+                            <div class="ai-thinking-dot"></div>
+                            <div class="ai-thinking-dot"></div>
+                        </div>
+                    `;
+                    aiChatMessages.appendChild(thinkingDiv);
+                    aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+                }
+                
+                // Function to remove "AI is thinking" indicator
+                function hideThinking() {
+                    const thinkingIndicator = document.getElementById('ai-thinking-indicator');
+                    if (thinkingIndicator) {
+                        thinkingIndicator.remove();
+                    }
+                }
+                
+                // Function to handle sending a message
+                async function sendMessage() {
+                    const message = aiChatInput.value.trim();
+                    if (!message) return;
+                    
+                    // Disable input and button while processing
+                    aiChatInput.disabled = true;
+                    aiSendButton.disabled = true;
+                    
+                    // Add user message to UI
+                    addMessageToChat(message, 'user');
+                    
+                    // Add user message to conversation history
+                    const newMessage = {
+                        role: "user",
+                        content: message
+                    };
+                    conversationHistory.push(newMessage);
+                    
+                    // Clear input
+                    aiChatInput.value = '';
+                    
+                    // Show thinking indicator
+                    showThinking();
+                    
+                    try {
+                        // Send to AI and get response
+                        // Only send the last 10 messages to avoid token limits
+                        const recentHistory = conversationHistory.slice(-10);
+                        
+                        const completion = await websim.chat.completions.create({
+                            messages: [
+                                {
+                                    role: "system",
+                                    content: "You are a helpful, creative, and friendly AI assistant. Your goal is to help users with their questions, provide creative ideas, and engage in thoughtful conversation. Always be respectful, informative, and concise but thorough in your responses."
+                                },
+                                ...recentHistory
+                            ]
+                        });
+                        
+                        // Hide thinking indicator
+                        hideThinking();
+                        
+                        // Get AI response
+                        const response = completion.content;
+                        
+                        // Add AI response to UI
+                        addMessageToChat(response, 'assistant');
+                        
+                        // Add AI response to conversation history
+                        conversationHistory.push({
+                            role: "assistant",
+                            content: response
+                        });
+                    } catch (error) {
+                        console.error('Error sending message to AI:', error);
+                        
+                        // Hide thinking indicator
+                        hideThinking();
+                        
+                        // Show error message
+                        addMessageToChat("I'm sorry, there was an error processing your request. Please try again.", 'assistant');
+                        
+                        // Add error response to conversation history
+                        conversationHistory.push({
+                            role: "assistant",
+                            content: "I'm sorry, there was an error processing your request. Please try again."
+                        });
+                    } finally {
+                        // Re-enable input and button
+                        aiChatInput.disabled = false;
+                        aiSendButton.disabled = false;
+                        aiChatInput.focus();
+                    }
+                }
+                
+                // Event listeners for AI Chat
+                if (aiSendButton) {
+                    aiSendButton.addEventListener('click', sendMessage);
+                }
+                
+                if (aiChatInput) {
+                    aiChatInput.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            sendMessage();
+                        }
+                    });
+                }
+                
+                if (resetAiChatButton) {
+                    resetAiChatButton.addEventListener('click', function() {
+                        // Clear chat history except for the initial greeting
+                        conversationHistory = [
+                            {
+                                role: "assistant",
+                                content: "Hello! I'm your AI assistant. How can I help you today? You can ask me questions, get creative help, or just chat about ideas."
+                            }
+                        ];
+                        
+                        // Clear UI
+                        aiChatMessages.innerHTML = '';
+                        
+                        // Add initial greeting back to UI
+                        addMessageToChat(conversationHistory[0].content, 'assistant');
+                        
+                        // Show success message
+                        ToastManager.create('Chat conversation has been reset', 'success');
+                    });
+                }
+                
+                // Quick prompt buttons
+                if (aiChatOptionButtons) {
+                    aiChatOptionButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const promptText = this.getAttribute('data-prompt');
+                            if (promptText && aiChatInput) {
+                                aiChatInput.value = promptText;
+                                aiChatInput.focus();
+                            }
+                        });
+                    });
+                }
+            });
+            
+            // Gamification System
+            const GameSystem = {
+                points: 0,
+                level: 1,
+                xp: 0,
+                xpToNextLevel: 100,
+                stats: {
+                    ideasGenerated: 0,
+                    ideasSaved: 0,
+                    achievementsUnlocked: 0,
+                    creativityScore: 0,
+                    currentStreak: 0,
+                    highestLevel: 1
+                },
+                achievements: [
+                    { id: 'first-idea', title: 'First Spark', description: 'Generate your first creative idea', icon: '💡', unlocked: false, pointsReward: 50 },
+                    { id: 'idea-collector', title: 'Idea Collector', description: 'Save 5 ideas', icon: '📚', unlocked: false, pointsReward: 100 },
+                    { id: 'brainstormer', title: 'Brainstormer', description: 'Generate 10 sets of ideas', icon: '🧠', unlocked: false, pointsReward: 200 },
+                    { id: 'creative-explorer', title: 'Creative Explorer', description: 'Try all features of the app', icon: '🧭', unlocked: false, pointsReward: 300 },
+                    { id: 'visual-thinker', title: 'Visual Thinker', description: 'Generate ideas from an image', icon: '🖼️', unlocked: false, pointsReward: 150 },
+                    { id: 'code-wizard', title: 'Code Wizard', description: 'Use the code assistant', icon: '👨‍💻', unlocked: false, pointsReward: 150 },
+                    { id: 'learning-master', title: 'Learning Master', description: 'Use the learning assistant', icon: '🎓', unlocked: false, pointsReward: 150 },
+                    { id: 'chatty-creative', title: 'Chatty Creative', description: 'Have a conversation with the AI assistant', icon: '💬', unlocked: false, pointsReward: 100 },
+                    { id: 'persistent-creator', title: 'Persistent Creator', description: 'Use the app for 3 days in a row', icon: '📆', unlocked: false, pointsReward: 250 }
+                ],
+                
+                init: function() {
+                    this.loadState();
+                    this.updateUI();
+                    this.renderAchievements();
+                    this.checkForAchievements();
+                    
+                    // Check for daily streak
+                    const lastUsedDate = localStorage.getItem('lastUsedDate');
+                    const today = new Date().toDateString();
+                    
+                    if (lastUsedDate) {
+                        const lastDate = new Date(lastUsedDate);
+                        const yesterday = new Date();
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        
+                        if (lastDate.toDateString() === yesterday.toDateString()) {
+                            // Used yesterday, increment streak
+                            this.stats.currentStreak++;
+                            this.saveState();
+                            
+                            // Check for streak achievement
+                            if (this.stats.currentStreak >= 3) {
+                                this.unlockAchievement('persistent-creator');
+                            }
+                        } else if (lastDate.toDateString() !== today) {
+                            // Not used yesterday and not used today yet, reset streak
+                            this.stats.currentStreak = 1;
+                            this.saveState();
+                        }
+                    } else {
+                        // First time using the app
+                        this.stats.currentStreak = 1;
+                        this.saveState();
+                    }
+                    
+                    // Update last used date
+                    localStorage.setItem('lastUsedDate', today);
+                },
+                
+                loadState: function() {
+                    const gameState = StorageManager.get('gameState');
+                    if (gameState) {
+                        this.points = gameState.points || 0;
+                        this.level = gameState.level || 1;
+                        this.xp = gameState.xp || 0;
+                        this.xpToNextLevel = gameState.xpToNextLevel || 100;
+                        this.stats = gameState.stats || this.stats;
+                        this.achievements = gameState.achievements || this.achievements;
+                    }
+                },
+                
+                saveState: function() {
+                    const gameState = {
+                        points: this.points,
+                        level: this.level,
+                        xp: this.xp,
+                        xpToNextLevel: this.xpToNextLevel,
+                        stats: this.stats,
+                        achievements: this.achievements
+                    };
+                    StorageManager.save('gameState', gameState);
+                },
+                
+                updateUI: function() {
+                    // Update points display
+                    document.getElementById('points-display').textContent = this.points;
+                    
+                    // Update level and XP bar
+                    document.getElementById('level-badge').textContent = this.level;
+                    const xpPercentage = (this.xp / this.xpToNextLevel) * 100;
+                    document.getElementById('xp-progress').style.width = `${xpPercentage}%`;
+                    
+                    // Update stats in the stats tab
+                    document.getElementById('total-ideas-generated').textContent = this.stats.ideasGenerated;
+                    document.getElementById('total-ideas-saved').textContent = this.stats.ideasSaved;
+                    document.getElementById('total-achievements').textContent = this.stats.achievementsUnlocked;
+                    document.getElementById('creativity-score').textContent = this.stats.creativityScore;
+                    document.getElementById('current-streak').textContent = this.stats.currentStreak;
+                    document.getElementById('highest-level').textContent = this.stats.highestLevel;
+                },
+                
+                renderAchievements: function() {
+                    // Render unlocked achievements in the top bar
+                    const achievementsContainer = document.getElementById('achievements-container');
+                    achievementsContainer.innerHTML = '';
+                    
+                    const unlockedAchievements = this.achievements.filter(a => a.unlocked);
+                    unlockedAchievements.slice(0, 3).forEach(achievement => {
+                        const badge = document.createElement('div');
+                        badge.className = 'achievement-badge';
+                        badge.innerHTML = achievement.icon;
+                        badge.setAttribute('data-title', achievement.title);
+                        achievementsContainer.appendChild(badge);
+                    });
+                    
+                    // Render all achievements in the stats tab
+                    const achievementsGrid = document.getElementById('achievements-grid');
+                    if (achievementsGrid) {
+                        achievementsGrid.innerHTML = '';
+                        
+                        this.achievements.forEach(achievement => {
+                            const card = document.createElement('div');
+                            card.className = 'prompt-card';
+                            if (achievement.unlocked) {
+                                card.style.borderColor = 'var(--success)';
+                                card.style.boxShadow = '0 4px 15px rgba(76, 175, 80, 0.2)';
+                            } else {
+                                card.style.opacity = '0.7';
+                            }
+                            
+                            card.innerHTML = `
+                                <div style="font-size: 2rem; text-align: center; margin-bottom: 0.5rem;">${achievement.icon}</div>
+                                <h3 style="margin-top: 0;">${achievement.title}</h3>
+                                <p>${achievement.description}</p>
+                                <div style="color: var(--game-gold); font-weight: bold;">+${achievement.pointsReward} points</div>
+                                <div style="margin-top: 0.5rem; color: var(--light-text);">
+                                    ${achievement.unlocked ? 'Unlocked' : 'Locked'}
+                                </div>
+                            `;
+                            
+                            achievementsGrid.appendChild(card);
+                        });
+                    }
+                },
+                
+                addPoints: function(amount) {
+                    this.points += amount;
+                    this.addXP(Math.floor(amount / 2));
+                    this.saveState();
+                    this.updateUI();
+                    
+                    // Show points animation
+                    this.showReward(`+${amount} points!`);
+                },
+                
+                addXP: function(amount) {
+                    this.xp += amount;
+                    this.stats.creativityScore += amount;
+                    
+                    // Check for level up
+                    if (this.xp >= this.xpToNextLevel) {
+                        this.levelUp();
+                    }
+                    
+                    this.saveState();
+                },
+                
+                levelUp: function() {
+                    this.level++;
+                    this.xp = this.xp - this.xpToNextLevel;
+                    this.xpToNextLevel = Math.floor(this.xpToNextLevel * 1.5);
+                    
+                    // Update highest level if needed
+                    if (this.level > this.stats.highestLevel) {
+                        this.stats.highestLevel = this.level;
+                    }
+                    
+                    this.saveState();
+                    this.updateUI();
+                    
+                    // Show level up animation
+                    this.showReward(`Level Up! You are now level ${this.level}`, true);
+                    
+                    // Add bonus points for leveling up
+                    this.addPoints(this.level * 50);
+                },
+                
+                unlockAchievement: function(achievementId) {
+                    const achievement = this.achievements.find(a => a.id === achievementId);
+                    
+                    if (achievement && !achievement.unlocked) {
+                        achievement.unlocked = true;
+                        this.stats.achievementsUnlocked++;
+                        this.addPoints(achievement.pointsReward);
+                        this.saveState();
+                        this.renderAchievements();
+                        
+                        // Show achievement unlock animation
+                        this.showReward(`Achievement Unlocked: ${achievement.title}`, true);
+                    }
+                },
+                
+                showReward: function(message, isSpecial = false) {
+                    const rewardDiv = document.createElement('div');
+                    rewardDiv.className = 'reward-animation';
+                    if (isSpecial) {
+                        rewardDiv.style.background = 'var(--gradient)';
+                        rewardDiv.style.fontSize = '1.2rem';
+                        rewardDiv.style.padding = '1.5rem 2.5rem';
+                    }
+                    rewardDiv.textContent = message;
+                    
+                    document.body.appendChild(rewardDiv);
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(rewardDiv);
+                    }, 2000);
+                },
+                
+                recordIdeaGenerated: function(count = 1) {
+                    this.stats.ideasGenerated += count;
+                    this.saveState();
+                    this.updateUI();
+                    
+                    // Check for achievements
+                    if (this.stats.ideasGenerated === 1) {
+                        this.unlockAchievement('first-idea');
+                    }
+                    
+                    if (this.stats.ideasGenerated >= 10) {
+                        this.unlockAchievement('brainstormer');
+                    }
+                    
+                    // Add points
+                    this.addPoints(15 * count);
+                },
+                
+                recordIdeaSaved: function() {
+                    this.stats.ideasSaved++;
+                    this.saveState();
+                    this.updateUI();
+                    
+                    // Check for achievements
+                    if (this.stats.ideasSaved >= 5) {
+                        this.unlockAchievement('idea-collector');
+                    }
+                    
+                    // Add points
+                    this.addPoints(25);
+                },
+                
+                checkFeatureUsage: function(feature) {
+                    // Track feature usage for the "Creative Explorer" achievement
+                    const featuresUsed = StorageManager.get('featuresUsed') || [];
+                    
+                    if (!featuresUsed.includes(feature)) {
+                        featuresUsed.push(feature);
+                        StorageManager.save('featuresUsed', featuresUsed);
+                        
+                        // Add points for trying a new feature
+                        this.addPoints(30);
+                        
+                        // Check specific feature achievements
+                        if (feature === 'visual-ideation') {
+                            this.unlockAchievement('visual-thinker');
+                        } else if (feature === 'code-assistant') {
+                            this.unlockAchievement('code-wizard');
+                        } else if (feature === 'learning-assistant') {
+                            this.unlockAchievement('learning-master');
+                        } else if (feature === 'ai-chat') {
+                            this.unlockAchievement('chatty-creative');
+                        }
+                        
+                        // Check if all features have been used
+                        const allFeatures = [
+                            'idea-generator', 
+                            'prompt-library', 
+                            'saved-ideas', 
+                            'history', 
+                            'code-assistant', 
+                            'learning-assistant', 
+                            'visual-ideation', 
+                            'ai-chat'
+                        ];
+                        
+                        const allUsed = allFeatures.every(f => featuresUsed.includes(f));
+                        if (allUsed) {
+                            this.unlockAchievement('creative-explorer');
+                        }
+                    }
+                },
+                
+                checkForAchievements: function() {
+                    // Check existing data for achievements that might already be unlocked
+                    
+                    // Check ideas generated
+                    if (this.stats.ideasGenerated >= 1) {
+                        this.unlockAchievement('first-idea');
+                    }
+                    
+                    if (this.stats.ideasGenerated >= 10) {
+                        this.unlockAchievement('brainstormer');
+                    }
+                    
+                    // Check ideas saved
+                    if (this.stats.ideasSaved >= 5) {
+                        this.unlockAchievement('idea-collector');
+                    }
+                    
+                    // Check streak
+                    if (this.stats.currentStreak >= 3) {
+                        this.unlockAchievement('persistent-creator');
+                    }
+                    
+                    // Check features used
+                    const featuresUsed = StorageManager.get('featuresUsed') || [];
+                    
+                    if (featuresUsed.includes('visual-ideation')) {
+                        this.unlockAchievement('visual-thinker');
+                    }
+                    
+                    if (featuresUsed.includes('code-assistant')) {
+                        this.unlockAchievement('code-wizard');
+                    }
+                    
+                    if (featuresUsed.includes('learning-assistant')) {
+                        this.unlockAchievement('learning-master');
+                    }
+                    
+                    if (featuresUsed.includes('ai-chat')) {
+                        this.unlockAchievement('chatty-creative');
+                    }
+                    
+                    const allFeatures = [
+                        'idea-generator', 
+                        'prompt-library', 
+                        'saved-ideas', 
+                        'history', 
+                        'code-assistant', 
+                        'learning-assistant', 
+                        'visual-ideation', 
+                        'ai-chat'
+                    ];
+                    
+                    const allUsed = allFeatures.every(f => featuresUsed.includes(f));
+                    if (allUsed) {
+                        this.unlockAchievement('creative-explorer');
+                    }
+                }
+            };
+            
+            // Event Listeners
+            document.addEventListener('DOMContentLoaded', function() {
+                StorageManager.init();
+                generatePromptCards();
+                
+                // Initialize the gamification system
+                GameSystem.init();
+                
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        const tabId = this.dataset.tab;
+                        document.querySelectorAll('.tab-content').forEach(content => {
+                            content.classList.remove('active');
+                        });
+                        
+                        const tabContent = document.getElementById(`${tabId}-tab`);
+                        if (tabContent) {
+                            tabContent.classList.add('active');
+                            
+                            // Track feature usage for gamification
+                            if (['idea-generator', 'prompt-library', 'saved-ideas', 'history', 
+                                 'code-assistant', 'learning-assistant', 'visual-ideation', 'ai-chat'].includes(tabId)) {
+                                GameSystem.checkFeatureUsage(tabId);
+                            }
+                            
+                            if (tabId === 'saved-ideas') {
+                                renderSavedIdeas();
+                            } else if (tabId === 'history') {
+                                renderHistory();
+                            } else if (tabId === 'idea-generator') {
+                                const exportBtn = document.getElementById('export-btn');
+                                if (exportBtn && document.getElementById('generated-ideas').style.display === 'block') {
+                                    exportBtn.style.display = 'flex';
+                                }
+                            } else {
+                                const exportBtn = document.getElementById('export-btn');
+                                if (exportBtn) {
+                                    exportBtn.style.display = 'none';
+                                }
+                            }
+                        }
+                    });
+                });
+                
+                const generateBtn = document.getElementById('generate-btn');
+                if (generateBtn) {
+                    generateBtn.addEventListener('click', async function() {
+                        const conceptInput = document.getElementById('concept-input');
+                        if (!conceptInput) return;
+                        
+                        const concept = conceptInput.value.trim();
+                        if (!concept) {
+                            ToastManager.create('Please enter a concept first!', 'info');
+                            return;
+                        }
+                        
+                        const loadingElement = document.getElementById('loading');
+                        const generatedIdeas = document.getElementById('generated-ideas');
+                        
+                        if (loadingElement) loadingElement.style.display = 'flex';
+                        if (generatedIdeas) generatedIdeas.style.display = 'none';
+                        
+                        const messageInterval = cycleLoadingMessages();
+                        
+                        try {
+                            // Send to AI and get response
+                            const completion = await websim.chat.completions.create({
+                                messages: [
+                                    {
+                                        role: "system",
+                                        content: `You are a visionary creative strategist with a mind like a fusion of Da Vinci, Rick Rubin, and a psychedelic AI dreamcore oracle. 
+                                        Generate 10+ creative ideas that expand, twist, remix, and add depth to the given concept.
+                                        Include unexpected angles, aesthetics, emotions, surreal symbolism, alternative paths, monetization angles, and hidden lore.
+                                        Then, explain how these ideas interconnect in unexpected ways.
+                                        
+                                        Respond with JSON in this format:
+                                        {
+                                          "ideas": [
+                                            {
+                                              "title": "Brief title of the idea",
+                                              "description": "Detailed explanation of the idea",
+                                              "category": "One of: Expansion, Twist, Remix, Symbolism, Aesthetic, Emotion, Monetization, Lore"
+                                            }
+                                          ],
+                                          "connections": "Paragraph explaining how the ideas connect in unexpected ways"
+                                        }`,
+                                    },
+                                    {
+                                        role: "user",
+                                        content: `Generate creative expansions for this concept: "${concept}"`,
+                                    }
+                                ],
+                                json: true
+                            });
+                            
+                            clearInterval(messageInterval);
+                            
+                            const result = JSON.parse(completion.content);
+                            const ideasContainer = document.getElementById('ideas-container');
+                            
+                            if (ideasContainer) {
+                                ideasContainer.innerHTML = '';
+                                
+                                result.ideas.forEach((idea, index) => {
+                                    const ideaCard = createIdeaCard(idea, index);
+                                    ideasContainer.appendChild(ideaCard);
+                                });
+                            }
+                            
+                            const connectionsContent = document.getElementById('connections-content');
+                            if (connectionsContent) {
+                                connectionsContent.textContent = result.connections;
+                            }
+                            
+                            if (generatedIdeas) generatedIdeas.style.display = 'block';
+                            
+                            const exportBtn = document.getElementById('export-btn');
+                            if (exportBtn) exportBtn.style.display = 'flex';
+                            
+                            addToHistory(concept, result.ideas);
+                            
+                            // Record for gamification
+                            GameSystem.recordIdeaGenerated(result.ideas.length);
+                            
+                        } catch (error) {
+                            console.error('Error generating ideas:', error);
+                            ToastManager.create('There was an error generating ideas. Please try again.', 'error');
+                            clearInterval(messageInterval);
+                        } finally {
+                            if (loadingElement) loadingElement.style.display = 'none';
+                        }
+                    });
+                }
+                
+                // Update game bar when ideas are saved or generated
+                document.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('idea-action-btn') && e.target.textContent === 'Save this idea') {
+                        GameSystem.recordIdeaSaved();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

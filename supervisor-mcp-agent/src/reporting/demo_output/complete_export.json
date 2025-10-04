@@ -1,0 +1,214 @@
+{
+  "export_timestamp": "2025-08-18T16:15:49.801175",
+  "system_version": "1.0.0",
+  "components": {
+    "audit_events": [
+      {
+        "id": "evt_001",
+        "timestamp": "2025-08-18T16:15:49.800323",
+        "event_type": "task_started",
+        "level": "info",
+        "agent_id": "agent_001",
+        "task_id": "task_001",
+        "cause": "User request",
+        "action": "Document processing",
+        "outcome": "started",
+        "metadata": {
+          "document_type": "PDF",
+          "size": 2048576
+        }
+      },
+      {
+        "id": "evt_002",
+        "timestamp": "2025-08-18T16:15:49.800332",
+        "event_type": "decision_made",
+        "level": "info",
+        "agent_id": "agent_001",
+        "task_id": "task_001",
+        "cause": "Classification required",
+        "action": "Document classification",
+        "outcome": "classified",
+        "confidence": 0.87,
+        "metadata": {
+          "classification": "invoice",
+          "confidence": 0.87
+        }
+      },
+      {
+        "id": "evt_003",
+        "timestamp": "2025-08-18T16:15:49.800334",
+        "event_type": "task_completed",
+        "level": "info",
+        "agent_id": "agent_001",
+        "task_id": "task_001",
+        "cause": "Processing finished",
+        "action": "Finalize results",
+        "outcome": "success",
+        "metadata": {
+          "execution_time": 23.5,
+          "pages_processed": 5
+        }
+      },
+      {
+        "id": "evt_004",
+        "timestamp": "2025-08-18T16:15:49.800337",
+        "event_type": "task_failed",
+        "level": "error",
+        "agent_id": "agent_002",
+        "task_id": "task_002",
+        "cause": "Timeout occurred",
+        "action": "Data processing",
+        "outcome": "timeout",
+        "metadata": {
+          "execution_time": 305,
+          "error_type": "timeout"
+        }
+      }
+    ],
+    "alerts": [
+      {
+        "id": "alert_001",
+        "timestamp": "2025-08-18T16:15:49.800594",
+        "priority": "HIGH",
+        "title": "Task Timeout Detected",
+        "message": "Task task_002 exceeded timeout threshold",
+        "agent_id": "agent_002",
+        "task_id": "task_002",
+        "category": "performance"
+      }
+    ],
+    "patterns": [
+      {
+        "id": "pattern_001",
+        "name": "Timeout Failures",
+        "pattern_type": "failure",
+        "description": "Recurring timeout errors detected",
+        "frequency": 1,
+        "confidence": 0.8,
+        "impact_score": 0.7,
+        "recommendations": [
+          "Increase timeout thresholds",
+          "Optimize processing algorithms",
+          "Implement retry mechanisms"
+        ]
+      },
+      {
+        "id": "pattern_002",
+        "name": "Slow Performance",
+        "pattern_type": "performance",
+        "description": "Tasks taking longer than expected",
+        "frequency": 1,
+        "confidence": 0.9,
+        "impact_score": 0.6,
+        "recommendations": [
+          "Profile task execution",
+          "Optimize resource allocation",
+          "Consider parallel processing"
+        ]
+      },
+      {
+        "id": "pattern_003",
+        "name": "Low Confidence Decisions",
+        "pattern_type": "confidence",
+        "description": "Multiple decisions with low confidence scores",
+        "frequency": 4,
+        "confidence": 0.85,
+        "impact_score": 0.5,
+        "recommendations": [
+          "Review decision models",
+          "Increase training data",
+          "Implement confidence thresholds"
+        ]
+      }
+    ],
+    "confidence_data": [
+      {
+        "decision_id": "decision_task_001",
+        "agent_id": "agent_001",
+        "task_id": "task_001",
+        "predicted_confidence": 0.87,
+        "actual_outcome": true,
+        "decision_type": "invoice",
+        "timestamp": "2025-08-18T16:15:49.800332"
+      },
+      {
+        "decision_id": "dec_001",
+        "predicted_confidence": 0.95,
+        "actual_outcome": true,
+        "agent_id": "agent_001",
+        "task_id": "task_010",
+        "decision_type": "classification",
+        "timestamp": "2025-08-18T16:15:49.800695"
+      },
+      {
+        "decision_id": "dec_002",
+        "predicted_confidence": 0.85,
+        "actual_outcome": true,
+        "agent_id": "agent_002",
+        "task_id": "task_011",
+        "decision_type": "classification",
+        "timestamp": "2025-08-18T16:15:49.800699"
+      },
+      {
+        "decision_id": "dec_003",
+        "predicted_confidence": 0.75,
+        "actual_outcome": false,
+        "agent_id": "agent_003",
+        "task_id": "task_012",
+        "decision_type": "classification",
+        "timestamp": "2025-08-18T16:15:49.800702"
+      },
+      {
+        "decision_id": "dec_004",
+        "predicted_confidence": 0.65,
+        "actual_outcome": true,
+        "agent_id": "agent_001",
+        "task_id": "task_013",
+        "decision_type": "classification",
+        "timestamp": "2025-08-18T16:15:49.800705"
+      },
+      {
+        "decision_id": "dec_005",
+        "predicted_confidence": 0.45,
+        "actual_outcome": false,
+        "agent_id": "agent_002",
+        "task_id": "task_014",
+        "decision_type": "classification",
+        "timestamp": "2025-08-18T16:15:49.800707"
+      },
+      {
+        "decision_id": "dec_006",
+        "predicted_confidence": 0.35,
+        "actual_outcome": false,
+        "agent_id": "agent_003",
+        "task_id": "task_015",
+        "decision_type": "classification",
+        "timestamp": "2025-08-18T16:15:49.800709"
+      },
+      {
+        "decision_id": "dec_007",
+        "predicted_confidence": 0.25,
+        "actual_outcome": false,
+        "agent_id": "agent_001",
+        "task_id": "task_016",
+        "decision_type": "classification",
+        "timestamp": "2025-08-18T16:15:49.800711"
+      },
+      {
+        "decision_id": "dec_008",
+        "predicted_confidence": 0.15,
+        "actual_outcome": false,
+        "agent_id": "agent_002",
+        "task_id": "task_017",
+        "decision_type": "classification",
+        "timestamp": "2025-08-18T16:15:49.800713"
+      }
+    ]
+  },
+  "summary": {
+    "total_events": 4,
+    "total_alerts": 1,
+    "total_patterns": 3,
+    "total_decisions": 9
+  }
+}

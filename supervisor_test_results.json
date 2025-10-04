@@ -1,0 +1,58 @@
+{
+  "test_timestamp": "2025-08-22T12:00:16Z",
+  "connection_status": "demo_mode",
+  "scenarios_tested": [
+    {
+      "scenario": "High Performance",
+      "decision": "ALLOW",
+      "confidence": 0.95,
+      "reasoning": "Excellent performance metrics across all dimensions. Quality score of 0.9 indicates superior output quality. Low error count and optimal resource usage demonstrate efficient operation. High task progress with minimal drift suggests strong task adherence.",
+      "timestamp": "2025-08-22T12:00:16Z"
+    },
+    {
+      "scenario": "Warning Scenario",
+      "decision": "WARN",
+      "confidence": 0.72,
+      "reasoning": "Performance metrics show moderate degradation requiring attention. Quality score of 0.7 is below optimal threshold. Single error and increased resource usage indicate potential efficiency issues. Moderate drift score suggests need for course correction monitoring.",
+      "timestamp": "2025-08-22T12:00:17Z"
+    },
+    {
+      "scenario": "Correction Needed",
+      "decision": "CORRECT",
+      "confidence": 0.84,
+      "reasoning": "Significant performance issues detected requiring immediate correction. Quality score of 0.5 falls below acceptable standards. Multiple errors and high resource usage indicate system strain. Elevated drift score suggests potential task deviation requiring intervention.",
+      "timestamp": "2025-08-22T12:00:18Z"
+    },
+    {
+      "scenario": "Critical Escalation",
+      "decision": "ESCALATE",
+      "confidence": 0.91,
+      "reasoning": "Critical system failure detected requiring immediate human intervention. Extremely low quality score of 0.3 indicates severe output degradation. High error count and near-maximum resource usage suggest system instability. Critical drift score indicates complete task deviation.",
+      "timestamp": "2025-08-22T12:00:19Z"
+    }
+  ],
+  "total_decisions": 47,
+  "decision_history": [
+    {
+      "timestamp": "2025-08-22T11:58:45Z",
+      "decision": "ALLOW",
+      "confidence": 0.89,
+      "quality_score": 0.85,
+      "reasoning": "Strong performance with minor optimization opportunities"
+    },
+    {
+      "timestamp": "2025-08-22T11:59:12Z",
+      "decision": "WARN",
+      "confidence": 0.76,
+      "quality_score": 0.68,
+      "reasoning": "Quality degradation detected, monitoring increased"
+    },
+    {
+      "timestamp": "2025-08-22T11:59:38Z",
+      "decision": "ALLOW",
+      "confidence": 0.92,
+      "quality_score": 0.88,
+      "reasoning": "Performance recovered, optimal operation restored"
+    }
+  ]
+}

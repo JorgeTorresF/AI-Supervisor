@@ -1,0 +1,12 @@
+[
+  {
+    "id": "alert_001",
+    "timestamp": "2025-08-18T16:15:49.800594",
+    "priority": "HIGH",
+    "title": "Task Timeout Detected",
+    "message": "Task task_002 exceeded timeout threshold",
+    "agent_id": "agent_002",
+    "task_id": "task_002",
+    "category": "performance"
+  }
+]

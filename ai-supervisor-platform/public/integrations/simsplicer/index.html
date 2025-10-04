@@ -1,0 +1,143 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧬 Simsplicer AI: Aesthetic Code Forge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports": {
+            "prismjs": "https://esm.sh/prismjs@1.29.0",
+            "prism-css": "https://esm.sh/prismjs@1.29.0/components/prism-css.min.js",
+            "prism-javascript": "https://esm.sh/prismjs@1.29.0/components/prism-javascript.min.js"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    <div class="holographic-overlay"></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">🧬 <span class="glitch" data-text="SIMSPLICER AI">SIMSPLICER AI</span></h1>
+            <p class="tagline">Aesthetic Code Forge</p>
+        </div>
+        <div class="neural-network"></div>
+    </header>
+
+    <main class="main-container">
+        <div class="workspace">
+            <!-- Prompt Input Section -->
+            <section class="prompt-section">
+                <div class="section-header">
+                    <h2>⚡ AI Prompt Generator</h2>
+                    <div class="ai-status">
+                        <div class="ai-indicator"></div>
+                        <span>NEURAL FORGE ACTIVE</span>
+                    </div>
+                </div>
+                <div class="prompt-container">
+                    <textarea id="promptInput" placeholder="Describe your aesthetic vision... (e.g., 'slushwave button with neon glow', 'minimalist glitchcore grid layout')"></textarea>
+                    <div class="prompt-controls">
+                        <select id="styleSelector">
+                            <option value="slushwave">🌊 Slushwave</option>
+                            <option value="glitchcore">⚡ Glitchcore</option>
+                            <option value="minimal">🔲 Minimal</option>
+                            <option value="cyberpunk">🤖 Cyberpunk</option>
+                            <option value="vaporwave">🌸 Vaporwave</option>
+                            <option value="brutalist">🏗️ Brutalist</option>
+                        </select>
+                        <button id="generateBtn" class="generate-btn">FORGE CODE</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Editor Section -->
+            <section class="editor-section">
+                <div class="section-header">
+                    <h2>🔧 Visual Code Editor</h2>
+                    <div class="editor-controls">
+                        <button id="remixBtn" class="control-btn">REMIX</button>
+                        <button id="saveBtn" class="control-btn">SAVE</button>
+                        <button id="shareBtn" class="control-btn">SHARE</button>
+                    </div>
+                </div>
+                <div class="editor-container">
+                    <div class="editor-tabs">
+                        <button class="tab active" data-tab="html">HTML</button>
+                        <button class="tab" data-tab="css">CSS</button>
+                        <button class="tab" data-tab="js">JS</button>
+                    </div>
+                    <div class="code-editor">
+                        <pre class="code-display" id="codeDisplay"><code id="codeContent">// Select a style and enter a prompt to generate aesthetic code...</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Live Preview Section -->
+            <section class="preview-section">
+                <div class="section-header">
+                    <h2>👁️ Live Preview</h2>
+                    <div class="preview-controls">
+                        <button id="refreshPreview" class="control-btn">REFRESH</button>
+                        <button id="fullscreenPreview" class="control-btn">FULLSCREEN</button>
+                    </div>
+                </div>
+                <div class="preview-container">
+                    <iframe id="previewFrame" title="Live Preview"></iframe>
+                </div>
+            </section>
+        </div>
+
+        <!-- Component Library -->
+        <aside class="component-library">
+            <div class="section-header">
+                <h2>📚 Style Library</h2>
+                <button id="libraryToggle" class="control-btn">EXPAND</button>
+            </div>
+            <div class="library-content">
+                <div class="component-grid" id="componentGrid">
+                    <!-- Components will be populated by JavaScript -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio-section collapsed" id="portfolioSection">
+            <div class="section-header">
+                <h2>🎨 My Creations</h2>
+                <button id="portfolioToggle" class="control-btn">TOGGLE</button>
+            </div>
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- User creations will be populated here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Panel -->
+    <div class="floating-panel">
+        <button class="floating-btn" id="randomizeBtn" title="Random Generation">🎲</button>
+        <button class="floating-btn" id="exportBtn" title="Export Code">📁</button>
+        <button class="floating-btn" id="importBtn" title="Import Code">📂</button>
+    </div>
+
+    <!-- Modal for sharing/saving -->
+    <div class="modal" id="saveModal">
+        <div class="modal-content">
+            <h3>Save Creation</h3>
+            <input type="text" id="creationName" placeholder="Enter creation name...">
+            <textarea id="creationDescription" placeholder="Describe your creation..."></textarea>
+            <div class="modal-actions">
+                <button id="confirmSave" class="generate-btn">SAVE</button>
+                <button id="cancelSave" class="control-btn">CANCEL</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="components.js"></script>
+    <script src="code-generator.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
