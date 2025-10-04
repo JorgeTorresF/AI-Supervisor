@@ -1,0 +1,418 @@
+[
+  {
+    "query": "Modern visualization of real-time data connections and network communications",
+    "image_info": {
+      "url": "https://d2908q01vomqb2.cloudfront.net/0a57cb53ba59c46fc4b692527a38a87c78d84028/2021/11/18/simplewsapi1.png",
+      "file_path": "/workspace/imgs/websocket-realtime-data-flow-aws-appsync-diagram.png",
+      "img_format": "PNG",
+      "mode": "RGBA",
+      "file_size": 182386,
+      "width": 1132,
+      "height": 578,
+      "total_pixels": 654296,
+      "basic_score": 0.8825499917337053
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 98.0,
+      "clarity_score": 95.0,
+      "watermark_score": 100.0,
+      "overall_score": 95.0,
+      "explanation": "The image is an excellent and clear visualization of real-time data connections using WebSockets, directly addressing the search query and prompt. It depicts a modern network flow with AWS AppSync, making it highly relevant. The diagram is crisp, professional, and free of watermarks.",
+      "file_name": "websocket-realtime-data-flow-aws-appsync-diagram.png",
+      "caption": "A network diagram illustrating a real-time data flow architecture where a 'Publisher' sends data via HTTPS to 'AWS AppSync (Local Resolver)'. AWS AppSync then distributes this data to multiple 'Subscribers' (represented by laptops and mobile devices) through secure WebSocket connections, demonstrating a modern approach to real-time communication and data synchronization.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Modern visualization of real-time data connections and network communications",
+    "image_info": {
+      "url": "https://cdn.navixy.com/59614_2dfb87fcd6.jpeg",
+      "file_path": "/workspace/imgs/websocket_realtime_data_visualization_network_diagram.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 80590,
+      "width": 1621,
+      "height": 846,
+      "total_pixels": 1371366,
+      "basic_score": 0.8938769075068187
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 95.0,
+      "clarity_score": 90.0,
+      "watermark_score": 70.0,
+      "overall_score": 85.0,
+      "explanation": "The image is highly relevant, directly addressing 'WebSocket' and 'real-time data visualization' with modern, clear graphics of data flow and connections. The clarity is excellent due to its vector-based nature. The 'Navixy' logo acts as branding/watermark, slightly reducing that score, but the overall professional quality and composition are very good.",
+      "file_name": "websocket_realtime_data_visualization_network_diagram.jpg",
+      "caption": "A modern, isometric illustration depicting a WebSocket integration for real-time vehicle sensor data visualization. The graphic features a central cloud icon representing data processing, connected via arrows to processor-like components with double-arrow symbols, signifying active data exchange and network communication. The vibrant blue background has a subtle grid pattern, and the image prominently displays the text 'WEBSOCKET INTEGRATION FOR REAL-TIME VEHICLE SENSOR DATA VISUALIZATION' alongside the 'Navixy' logo.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Modern visualization of real-time data connections and network communications",
+    "image_info": {
+      "url": "https://lightningchart.com/wp-content/uploads/2022/12/Real-time-data-visualization-with-social-media.jpg",
+      "file_path": "/workspace/imgs/websocket-realtime-data-visualization-chart.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 408009,
+      "width": 1200,
+      "height": 627,
+      "total_pixels": 752400,
+      "basic_score": 0.9319756343963131
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 98.0,
+      "clarity_score": 95.0,
+      "watermark_score": 90.0,
+      "overall_score": 93.0,
+      "explanation": "The image perfectly aligns with the search query and prompt by explicitly stating 'Real-time data visualization with WebSockets' and visually depicting oscillating data streams. The clarity is excellent, with sharp text and clear graphics. While brand logos are present (LightningChart, JS), they are integrated design elements rather than obstructive watermarks, hence a high score. The overall composition is professional, modern, and highly effective in conveying the subject matter.",
+      "file_name": "websocket-realtime-data-visualization-chart.jpg",
+      "caption": "A modern promotional image showcasing 'LightningChart®' and its capability for 'Real-time data visualization with WebSockets'. The dark background contrasts with vibrant, multi-colored oscillating waveforms, representing dynamic data streams often found in network communications or sensor monitoring. The design incorporates JavaScript (JS) and brand logos, highlighting advanced technological solutions for data analysis and visualization.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Modern visualization of real-time data connections and network communications",
+    "image_info": {
+      "url": "https://www.syncfusion.com/blogs/wp-content/uploads/2025/03/Real-Time-Data-Visualization-in-React-using-WebSockets-and-Charts.jpg",
+      "file_path": "/workspace/imgs/real-time-data-visualization-react-graph.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 91415,
+      "width": 1192,
+      "height": 668,
+      "total_pixels": 796256,
+      "basic_score": 0.9166149684122027
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 90.0,
+      "clarity_score": 95.0,
+      "watermark_score": 100.0,
+      "overall_score": 90.0,
+      "explanation": "The image is highly relevant as it explicitly visualizes 'Real-time Data,' directly addressing the prompt and search query's core need for real-time connection visualization. The inclusion of the React logo further enhances its relevance to modern web technologies where WebSockets are commonly used for such connections. The image boasts excellent clarity with crisp details and text, and is completely free of watermarks. Its modern, professional aesthetic and clean composition contribute to a high overall quality, making it very suitable for depicting dynamic data and communication concepts.",
+      "file_name": "real-time-data-visualization-react-graph.jpg",
+      "caption": "A modern digital illustration featuring a vibrant real-time data graph with a wavy green and yellow line plotting values over time. The graph, titled 'Real-time Data,' is set against a dark background within a glowing border, with a yellow 3D React logo prominently displayed next to it. The overall background is a smooth gradient of blue, purple, and yellow, subtly incorporating abstract React logo outlines and graph elements, ideal for representing dynamic data streams, WebSocket connections, or network communication in web applications.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Modern visualization of real-time data connections and network communications",
+    "image_info": {
+      "url": "https://grafana.com/static/assets/img/blog/websocket1.png",
+      "file_path": "/workspace/imgs/real_time_data_monitoring_dashboard_visualization.jpg",
+      "img_format": "PNG",
+      "mode": "P",
+      "file_size": 86709,
+      "width": 1600,
+      "height": 995,
+      "total_pixels": 1592000,
+      "basic_score": 0.840882694366772
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 85.0,
+      "clarity_score": 100.0,
+      "watermark_score": 100.0,
+      "overall_score": 90.0,
+      "explanation": "The image provides a clear and modern visualization of real-time data, exemplified by the 'Last 5 minutes' time range and continuously updating graphs for temperature, pressure, and humidity. While it doesn't explicitly show network communication diagrams or the internal workings of a WebSocket connection, it effectively demonstrates the 'real-time data' aspect that is typically facilitated by such connections. The quality of the screenshot is excellent with no watermarks.",
+      "file_name": "real_time_data_monitoring_dashboard_visualization.jpg",
+      "caption": "A modern, dark-themed dashboard displaying real-time data visualization, featuring three distinct graphs. The top-left graph shows 'Temperature' as a bar chart, indicating values increasing over a five-minute period. The top-right graph displays 'Pressure' as an area chart with fluctuations. The bottom-left graph illustrates 'Humidity' with a fluctuating line graph, also over the last five minutes. The dashboard includes a sidebar navigation with various icons and a top bar with settings and a 'Last 5 minutes' time range selector, suggesting dynamic, up-to-the-minute data updates.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Futuristic AI supervisor robot icon in modern tech style for project branding",
+    "image_info": {
+      "url": "https://img.freepik.com/premium-photo/3d-ai-robot-icon-futuristic-ai-tech-illustration-logo_762678-90931.jpg",
+      "file_path": "/workspace/imgs/futuristic_ai_robot_supervisor_icon_branding.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 56472,
+      "width": 626,
+      "height": 626,
+      "total_pixels": 391876,
+      "basic_score": 0.820383980718065
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 95.0,
+      "clarity_score": 98.0,
+      "watermark_score": 100.0,
+      "overall_score": 97.0,
+      "explanation": "The image is highly relevant to the search query and prompt, depicting a futuristic AI robot in a modern tech style perfect for branding. It boasts excellent clarity, professional lighting, and a clean composition, with no watermarks. The 'supervisor' aspect is well-implied through its commanding yet approachable design.",
+      "file_name": "futuristic_ai_robot_supervisor_icon_branding.jpg",
+      "caption": "A sleek, futuristic AI robot character, rendered in a modern minimalist style, features a glossy white head and body with segmented black joints. Its face is a dark visor illuminated by two glowing, cyan-blue horizontal lights, suggesting an intelligent and contemporary presence. A subtle antenna protrudes from the back of its head. Warm orange ambient light subtly highlights one side of its head, while cool blue light accents the other, contrasting against a dark, featureless background. This high-quality 3D render is ideal for technology branding, icons, or concepts related to artificial intelligence, automation, and supervision.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Futuristic AI supervisor robot icon in modern tech style for project branding",
+    "image_info": {
+      "url": "https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://media.easy-peasy.ai/27feb2bb-aeb4-4a83-9fb6-8f3f2a15885e/eea40a4b-6206-4a29-9d21-283d9b3cf553.png",
+      "file_path": "/workspace/imgs/futuristic_ai_supervisor_robot_tech_icon.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 53177,
+      "width": 700,
+      "height": 700,
+      "total_pixels": 490000,
+      "basic_score": 0.8484674314594909
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 95.0,
+      "clarity_score": 98.0,
+      "watermark_score": 100.0,
+      "overall_score": 95.0,
+      "explanation": "The image perfectly matches the search query and prompt, depicting a highly detailed, futuristic AI robot with advanced tech interfaces, suitable for branding. Its clarity and professional rendering are exceptional, with no watermarks.",
+      "file_name": "futuristic_ai_supervisor_robot_tech_icon.jpg",
+      "caption": "A highly detailed, full-body rendering of a futuristic AI supervisor robot, isolated on a white background. The robot features a metallic grey and black armored body with numerous glowing blue holographic displays and interfaces across its chest, arms, and shoulders, indicating advanced data processing. Its head is equipped with antennas and glowing blue eyes, conveying intelligence and vigilance. One arm terminates in a pincer-like claw, while the other holds a tablet-like device, ideal for illustrating modern technology, AI, or advanced automation concepts.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Futuristic AI supervisor robot icon in modern tech style for project branding",
+    "image_info": {
+      "url": "https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://media.easy-peasy.ai/27feb2bb-aeb4-4a83-9fb6-8f3f2a15885e/638b0ec8-0e54-47d5-a851-2d2f536f1224.png",
+      "file_path": "/workspace/imgs/futuristic-ai-supervisor-robot-tech-icon.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 71163,
+      "width": 700,
+      "height": 700,
+      "total_pixels": 490000,
+      "basic_score": 0.8506015973845364
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 95.0,
+      "clarity_score": 98.0,
+      "watermark_score": 100.0,
+      "overall_score": 95.0,
+      "explanation": "The image is exceptionally relevant to the search query and prompt, depicting a highly futuristic AI robot in a modern tech style. Its clarity is outstanding, and there are no watermarks. The overall composition and professional rendering quality are very high, making it ideal for project branding. The 'supervisor' aspect is well-implied by the data/map elements in the background.",
+      "file_name": "futuristic-ai-supervisor-robot-tech-icon.jpg",
+      "caption": "A striking close-up of a futuristic humanoid robot with a metallic silver head and shoulders, featuring glowing blue eyes and exposed internal mechanics. The background is a deep blue, augmented with dynamic holographic user interface elements, including circular radar-like displays, world maps, and data visualizations. The image embodies advanced artificial intelligence and cutting-edge technology, perfect for themes of digital innovation, supervision, and modern computing.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Futuristic AI supervisor robot icon in modern tech style for project branding",
+    "image_info": {
+      "url": "https://static.vecteezy.com/system/resources/previews/017/064/243/non_2x/futuristic-robot-ai-icon-free-vector.jpg",
+      "file_path": "/workspace/imgs/futuristic_ai_supervisor_robot_icon_modern.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 26984,
+      "width": 849,
+      "height": 980,
+      "total_pixels": 832020,
+      "basic_score": 0.9010786170700955
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 98.0,
+      "clarity_score": 100.0,
+      "watermark_score": 100.0,
+      "overall_score": 97.0,
+      "explanation": "The image is an exceptionally relevant, high-quality isometric illustration of an AI robot icon. Its clean lines, modern aesthetic, and futuristic design perfectly align with 'modern tech style' and suitability for 'project branding' as requested. The clarity is excellent, and there are no watermarks.",
+      "file_name": "futuristic_ai_supervisor_robot_icon_modern.jpg",
+      "caption": "An isometric illustration depicting a futuristic AI supervisor robot icon. The robot features a smooth, light blue spherical head with a dark blue visor, a clean white cylindrical body, and dark teal pincer-like arms. Its design is sleek, modern, and well-suited for technology branding or representing artificial intelligence concepts.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "A sophisticated dark technology background with neural network patterns for AI supervisor interface",
+    "image_info": {
+      "url": "https://static.vecteezy.com/system/resources/previews/003/800/709/non_2x/ai-artificial-intelligence-wave-lines-neural-network-purple-blue-and-green-light-isolated-on-black-background-in-concept-of-technology-vector.jpg",
+      "file_path": "/workspace/imgs/ai_neural_network_dark_tech_background.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 40860,
+      "width": 1547,
+      "height": 980,
+      "total_pixels": 1516060,
+      "basic_score": 0.8664935192854766
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 95.0,
+      "clarity_score": 100.0,
+      "watermark_score": 100.0,
+      "overall_score": 95.0,
+      "explanation": "The image perfectly matches the search query and prompt by displaying abstract neural network-like patterns on a dark background. The lines are incredibly sharp with a smooth color gradient, indicating excellent clarity. There are no watermarks. Its minimalist and sophisticated design makes it highly suitable for a tech or AI interface background.",
+      "file_name": "ai_neural_network_dark_tech_background.jpg",
+      "caption": "An abstract, sophisticated technology background featuring stylized neural network patterns. Multiple smooth, wavy lines emerge from a single point on the left, transitioning in color from deep blue to vibrant red, culminating in small red dots on the right, all set against a pure black background. This design evokes concepts of data flow, machine learning, and artificial intelligence.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "A sophisticated dark technology background with neural network patterns for AI supervisor interface",
+    "image_info": {
+      "url": "https://images.stockcake.com/public/7/a/a/7aab373d-dbc6-44c3-b6cf-95bc96c9c4ed_large/digital-connectivity-mesh-stockcake.jpg",
+      "file_path": "/workspace/imgs/abstract_ai_neural_network_dark_tech_background.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 55205,
+      "width": 728,
+      "height": 408,
+      "total_pixels": 297024,
+      "basic_score": 0.7871742552012947
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 98.0,
+      "clarity_score": 95.0,
+      "watermark_score": 100.0,
+      "overall_score": 95.0,
+      "explanation": "The image is an excellent match for the search query and prompt, clearly depicting a sophisticated neural network pattern on a dark technology background. Its abstract and intricate design is perfect for an AI supervisor interface. The image is crisp, well-composed, and free of watermarks.",
+      "file_name": "abstract_ai_neural_network_dark_tech_background.jpg",
+      "caption": "An abstract digital illustration showcasing a complex neural network or data connections, featuring glowing teal and blue lines interconnecting numerous illuminated orange and yellow dots against a deep dark background. The composition creates a sophisticated technological aesthetic, evoking concepts of artificial intelligence, machine learning, big data, and global communication.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Modern dark monitoring dashboard with charts and data visualization for WebSocket monitoring",
+    "image_info": {
+      "url": "https://lh6.googleusercontent.com/KSsBXcaH5ZUrFvoq62zIH87AoKhM5YXOjuRBYmvZhWfzapvrwxFJVrqyqqTCa2Kb-IIuSlSU3vmMhmfR62Ctq2YigizYJz8O03BGQxeiH1iWKY-adJClraAkyu7uIqcQpJa8MEp0tVDC7QwQ8MSHAhA",
+      "file_path": "/workspace/imgs/modern_dark_monitoring_dashboard_data_visualization.jpg",
+      "img_format": "PNG",
+      "mode": "RGBA",
+      "file_size": 354891,
+      "width": 1600,
+      "height": 895,
+      "total_pixels": 1432000,
+      "basic_score": 0.9011163707043364
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 95.0,
+      "clarity_score": 90.0,
+      "watermark_score": 100.0,
+      "overall_score": 95.0,
+      "explanation": "The image perfectly matches the prompt, depicting a modern, dark-themed monitoring dashboard with a variety of charts and data visualizations. It clearly shows real-time website performance metrics, making it highly relevant for a 'real-time monitoring dashboard visualization' query. The image is crisp, clear, and professional, with no watermarks.",
+      "file_name": "modern_dark_monitoring_dashboard_data_visualization.jpg",
+      "caption": "A screenshot of a modern, dark-themed monitoring dashboard displaying real-time website performance metrics. The dashboard features multiple data visualizations including line graphs for Memory/CPU usage and logins, stacked area charts for server requests, gauge charts for Memory and Google hits, bar charts for Google hits by series, and stacked bar charts for client-side full page load times. The interface, possibly from a Linux environment like Ubuntu, is clean and professional, providing an overview of critical system and website performance indicators.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Modern dark monitoring dashboard with charts and data visualization for WebSocket monitoring",
+    "image_info": {
+      "url": "https://media.striim.com/wp-content/uploads/2016/04/21064130/Financial-Monitoring-Application-.png",
+      "file_path": "/workspace/imgs/dark-real-time-monitoring-dashboard-transaction-health.jpg",
+      "img_format": "PNG",
+      "mode": "RGB",
+      "file_size": 245637,
+      "width": 1024,
+      "height": 575,
+      "total_pixels": 588800,
+      "basic_score": 0.8837975241869148
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 92.0,
+      "clarity_score": 78.0,
+      "watermark_score": 100.0,
+      "overall_score": 88.0,
+      "explanation": "The image is highly relevant to both the search query and the prompt, showcasing a modern, dark-themed real-time monitoring dashboard with diverse charts and data visualizations. While the specific data shown relates to 'Transaction Flow Health' rather than explicit 'WebSocket monitoring,' the overall aesthetic, real-time nature, and data presentation align very well. Clarity is good, and there are no watermarks.",
+      "file_name": "dark-real-time-monitoring-dashboard-transaction-health.jpg",
+      "caption": "A detailed screenshot of a modern, dark-themed digital dashboard focused on 'Transaction Flow Health.' The interface displays various real-time data visualizations, including key performance indicators such as approval and decline rates for credit, check, ATM, and debit transactions. It features a geographical map illustrating transaction volume by state, line graphs depicting transaction volume and decline rates over time, and pie charts breaking down transaction volume by network end points and card types. The dashboard highlights its real-time capabilities with a counter for '277 Transactions in last 1 minute' and a timestamp of Dec 27th, 2015, 7:44:24 pm.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Modern dark monitoring dashboard with charts and data visualization for WebSocket monitoring",
+    "image_info": {
+      "url": "https://estuary.dev/static/6c813f288cf9f6545ab9dd94eb5d48b1/8dbcc/real_time_data_visualization_cover_image_9fbb3e3aba.jpg",
+      "file_path": "/workspace/imgs/modern_dark_dashboard_web_performance_monitoring.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 58896,
+      "width": 1200,
+      "height": 800,
+      "total_pixels": 960000,
+      "basic_score": 0.9289415598884027
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 70.0,
+      "clarity_score": 95.0,
+      "watermark_score": 100.0,
+      "overall_score": 90.0,
+      "explanation": "The image clearly depicts a modern, dark-themed monitoring dashboard with various charts and data visualizations, which aligns well with the general search query and prompt. The clarity is excellent, and there are no watermarks. However, the data shown pertains to general web performance metrics (page load, bounce rate, sessions) and not specifically 'real-time' or 'WebSocket monitoring' as requested in the prompt, which lowers the relevance score.",
+      "file_name": "modern_dark_dashboard_web_performance_monitoring.jpg",
+      "caption": "A close-up view of a laptop screen displaying a modern, dark-themed digital dashboard. The screen features various data visualizations, including blue histograms and pink line graphs, depicting key web performance metrics such as page load time, bounce rate, page views, and user sessions. The user interface is clean with white and light blue text and charts against a black background, suggesting a professional data analytics or monitoring application. A green plant is subtly visible in the blurred background, adding a touch of natural environment to the tech-focused scene.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Modern dark monitoring dashboard with charts and data visualization for WebSocket monitoring",
+    "image_info": {
+      "url": "https://logit.io/uploads/general/2Bf4qa667JEa6MskQlVsmC_Performance_Testing.png",
+      "file_path": "/workspace/imgs/dark_monitoring_dashboard_performance_metrics.jpg",
+      "img_format": "PNG",
+      "mode": "P",
+      "file_size": 317345,
+      "width": 1700,
+      "height": 878,
+      "total_pixels": 1492600,
+      "basic_score": 0.8772761899392729
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 75.0,
+      "clarity_score": 88.0,
+      "watermark_score": 100.0,
+      "overall_score": 90.0,
+      "explanation": "The image displays a modern, dark-themed monitoring dashboard with excellent data visualizations and charts, aligning well with the general request for a dark dashboard. It provides real-time load test metrics, which are highly relevant for performance monitoring. However, it does not explicitly show 'WebSocket monitoring' specific metrics or labels, which was a specific part of the prompt. Clarity is good for a screenshot, and there are no watermarks.",
+      "file_name": "dark_monitoring_dashboard_performance_metrics.jpg",
+      "caption": "A detailed screenshot of a modern, dark-themed load test monitoring dashboard, showcasing various performance metrics and data visualizations. The dashboard features several panels including key performance indicators like 'No active threads', '5561' (likely concurrent users or requests), and '3.85 K' (potentially throughput). Visualizations include line charts for 'Active threads' and 'Error count trend', an area chart for 'Load generator server metrics' showing CPU and Memory Usage, and a large red gauge indicating '69%' utilization. The interface also displays a time range (Jul 28, 2018), and expandable sections for 'Response Times Over Time' and 'Aggregate report', all presented in a clean, professional dark mode.",
+      "recommend": true,
+      "error": ""
+    }
+  },
+  {
+    "query": "Professional AI decision tree visualization in dark tech aesthetic for supervisor logic",
+    "image_info": {
+      "url": "https://slidebazaar.com/wp-content/uploads/2025/06/decision-trees-supervised-learning-dark-template-powerpoint-google-slides.jpg",
+      "file_path": "/workspace/imgs/ai_decision_tree_supervised_learning_flowchart_dark_tech.jpg",
+      "img_format": "JPEG",
+      "mode": "RGB",
+      "file_size": 82791,
+      "width": 1280,
+      "height": 720,
+      "total_pixels": 921600,
+      "basic_score": 0.9281806811008319
+    },
+    "llm_score": {
+      "success": true,
+      "relevance_score": 100.0,
+      "clarity_score": 100.0,
+      "watermark_score": 100.0,
+      "overall_score": 100.0,
+      "explanation": "The image perfectly matches the search query and prompt. It is a clear, professional visualization of a decision tree in a dark tech aesthetic, explicitly stating its role in supervised learning. The text is crisp, the diagram is well-organized, and there are no watermarks.",
+      "file_name": "ai_decision_tree_supervised_learning_flowchart_dark_tech.jpg",
+      "caption": "A professional diagram illustrating the structure and components of Decision Trees in Supervised Learning. The visualization features a dark background with blue and yellow nodes, detailing a Root Node, Decision Nodes, and Leaf Nodes, along with the concept of a Sub-Tree. On the right, definitions for each component are provided: Root Node (first node, splits based on most significant feature), Decision Node (tests/conditions leading to further splits), Leaf Node (final output/prediction, no further splitting), and Sub-Tree/Branch (a section of the tree representing a sub-decision path).",
+      "recommend": true,
+      "error": ""
+    }
+  }
+]

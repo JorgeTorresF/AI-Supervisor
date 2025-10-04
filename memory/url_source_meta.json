@@ -1,0 +1,107 @@
+{
+  "_source_id": 14,
+  "sources": {
+    "Task Coherence and Context Drift in AI Agents": {
+      "https://arxiv.org/html/2505.10468v1": {
+        "id": 1,
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2505.10468v1",
+        "title": "AI Agents vs. Agentic AI: A Conceptual Taxonomy, Applications and Challenges",
+        "info": "Comprehensive analysis of AI agent limitations including long-horizon planning failures, incomplete agentic properties, and inherited LLM limitations like hallucination and brittleness"
+      },
+      "https://phaneendrakn.medium.com/ai-chatbot-precision-techniques-to-avoid-conversational-drift-219845659a71": {
+        "id": 2,
+        "publisher": "Medium",
+        "url": "https://phaneendrakn.medium.com/ai-chatbot-precision-techniques-to-avoid-conversational-drift-219845659a71",
+        "title": "AI Chatbot Precision: Techniques to Avoid Conversational Drift",
+        "info": "Detailed analysis of conversational drift causes and prevention techniques including enhanced contextual understanding, user intent clarification, and feedback loops"
+      },
+      "https://medium.com/@lego17440/context-rot-the-hidden-vulnerability-in-ais-long-memory-afde1522c0c8": {
+        "id": 3,
+        "publisher": "Medium",
+        "url": "https://medium.com/@lego17440/context-rot-the-hidden-vulnerability-in-ais-long-memory-afde1522c0c8",
+        "title": "Context Rot: The Hidden Vulnerability in AI's Long Memory",
+        "info": "Comprehensive analysis of context rot phenomenon, attention mechanism failures, model-specific failure patterns, and hidden vulnerabilities in AI long-term memory"
+      },
+      "https://arxiv.org/html/2506.23260v1": {
+        "id": 4,
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2506.23260v1",
+        "title": "From Prompt Injections to Protocol Exploits: Threats in LLM-agent Ecosystems",
+        "info": "Unified threat model for LLM-agent ecosystems covering prompt injection attacks, context manipulation vulnerabilities, and keyword-triggered unwanted behaviors"
+      },
+      "https://www.comm100.com/blog/top-10-chatbot-fails-and-how-to-avoid-them.html": {
+        "id": 5,
+        "publisher": "Comm100",
+        "url": "https://www.comm100.com/blog/top-10-chatbot-fails-and-how-to-avoid-them.html",
+        "title": "Top 10 Chatbot Fails and How to Avoid Them",
+        "info": "Real-world examples of chatbot failures including Microsoft's Tay, Poncho weather bot keyword confusion, and Siri's context loss incidents"
+      },
+      "https://medium.com/@bravekjh/memory-management-for-ai-agents-principles-architectures-and-code-dac3b37653dc": {
+        "id": 6,
+        "publisher": "Medium",
+        "url": "https://medium.com/@bravekjh/memory-management-for-ai-agents-principles-architectures-and-code-dac3b37653dc",
+        "title": "Memory Management for AI Agents: Principles, Architectures and Code",
+        "info": "Detailed coverage of memory management principles, state persistence techniques, and best practices for long conversation handling in AI agents"
+      },
+      "https://www.manusai.io/blog/context-engineering-for-ai-agents-lessons-from-building-manus": {
+        "id": 7,
+        "publisher": "Manus AI",
+        "url": "https://www.manusai.io/blog/context-engineering-for-ai-agents-lessons-from-building-manus",
+        "title": "Mastering Context Engineering: Six Essential Strategies for Building High-Performance AI Agents",
+        "info": "Six core context engineering strategies including KV-cache optimization, intelligent tool masking, attention management through goal recitation, and preventing pattern lock-in"
+      }
+    },
+    "Browser-Based AI Agent Monitoring Analysis": {
+      "https://tech-depth-and-breadth.medium.com/comparing-real-time-communication-options-http-streaming-sse-or-websockets-for-conversational-74c12f0bd7bc": {
+        "id": 8,
+        "publisher": "Medium",
+        "url": "https://tech-depth-and-breadth.medium.com/comparing-real-time-communication-options-http-streaming-sse-or-websockets-for-conversational-74c12f0bd7bc",
+        "title": "Comparing Real-Time Communication Options: HTTP Streaming, SSE, or WebSockets for Conversational LLM Workflows",
+        "info": "Detailed technical comparison of HTTP Streaming, Server-Sent Events (SSE), and WebSockets for AI chat applications, including implementation details with FastAPI, pros/cons of each protocol, and specific use cases for conversational AI"
+      },
+      "https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts": {
+        "id": 9,
+        "publisher": "Google Chrome Developers",
+        "url": "https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts",
+        "title": "Content Scripts - Chrome Extensions Documentation",
+        "info": "Comprehensive technical documentation on Chrome extension content scripts, including Manifest V3 capabilities, injection methods (static, dynamic, programmatic), security guidelines, isolated worlds, and browser API access for monitoring web pages"
+      },
+      "https://medium.com/somos-pragma/an-alternative-for-sending-data-to-another-place-or-to-localstorage-postmessage-dc7e72e7ea11": {
+        "id": 10,
+        "publisher": "Medium",
+        "url": "https://medium.com/somos-pragma/an-alternative-for-sending-data-to-another-place-or-to-localstorage-postmessage-dc7e72e7ea11",
+        "title": "PostMessage API for Secure Cross-Origin Communication",
+        "info": "Technical guide on using postMessage API for secure cross-origin communication between windows and iframes, including security considerations for origin validation and targetOrigin parameter usage"
+      },
+      "https://github.com/browser-use/browser-use": {
+        "id": 11,
+        "publisher": "GitHub",
+        "url": "https://github.com/browser-use/browser-use",
+        "title": "Browser-Use: Enable AI to Control Your Browser",
+        "info": "Open-source framework for AI agents to control web browsers and automate online tasks, including integration with various LLMs, Playwright automation, and monitoring approaches for AI browser automation"
+      },
+      "https://www.vaadata.com/blog/content-security-policy-bypass-techniques-and-security-best-practices/": {
+        "id": 12,
+        "publisher": "Vaadata",
+        "url": "https://www.vaadata.com/blog/content-security-policy-bypass-techniques-and-security-best-practices/",
+        "title": "Content Security Policy Bypass Techniques and Security Best Practices",
+        "info": "Detailed analysis of CSP bypass techniques including unsafe-inline exploitation, JSONP endpoint abuse, file upload bypasses, wildcard vulnerabilities, and security recommendations for strengthening CSP policies"
+      },
+      "https://www.rapidinnovation.io/post/how-to-build-a-real-time-chat-app-with-react": {
+        "id": 13,
+        "publisher": "Rapid Innovation",
+        "url": "https://www.rapidinnovation.io/post/how-to-build-a-real-time-chat-app-with-react",
+        "title": "Ultimate Guide to Building a Real-time React Chat App in 2024",
+        "info": "Comprehensive technical guide covering React chat implementation patterns, WebSocket vs SSE comparison, AI integration patterns, frontend/backend architecture, performance optimization, and security considerations"
+      },
+      "https://openai.com/index/introducing-operator/": {
+        "id": 14,
+        "publisher": "OpenAI",
+        "url": "https://openai.com/index/introducing-operator/",
+        "title": "Introducing Operator - OpenAI's Browser Automation Agent",
+        "info": "Official documentation of OpenAI's Operator browser automation agent, including Computer-Using Agent (CUA) model capabilities, safety considerations, monitoring mechanisms, and web browsing AI agent architectures"
+      }
+    }
+  }
+}

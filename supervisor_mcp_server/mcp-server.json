@@ -1,0 +1,34 @@
+{
+  "name": "supervisor-agent-mcp",
+  "version": "1.0.0",
+  "description": "Comprehensive Supervisor Agent MCP Server with integrated monitoring, error handling, and reporting",
+  "author": "MiniMax AI",
+  "license": "MIT",
+  "main": "server.py",
+  "dependencies": {
+    "fastmcp": ">=0.2.0",
+    "pydantic": ">=2.0.0",
+    "asyncio": "*",
+    "json": "*",
+    "datetime": "*",
+    "typing": "*",
+    "logging": "*",
+    "pathlib": "*",
+    "dataclasses": "*",
+    "threading": "*",
+    "queue": "*",
+    "concurrent.futures": "*"
+  },
+  "tools": [
+    "monitor_agent",
+    "set_monitoring_rules",
+    "get_supervision_report",
+    "intervene_task",
+    "validate_output",
+    "get_audit_log",
+    "configure_escalation",
+    "knowledge_base_update",
+    "rollback_state",
+    "generate_summary"
+  ]
+}
