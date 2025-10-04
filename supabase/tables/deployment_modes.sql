@@ -1,0 +1,20 @@
+CREATE TABLE deployment_modes (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES auth.users(id),
+    deployment_mode TEXT NOT NULL CHECK (deployment_mode IN ('web_app',
+    'browser_extension',
+    'hybrid_gateway',
+    'local_installation')),
+    status TEXT NOT NULL DEFAULT 'inactive' CHECK (status IN ('active',
+    'inactive',
+    'error',
+    'deploying',
+    'maintenance')),
+    configuration JSONB DEFAULT '{}',
+    health_data JSONB DEFAULT '{}',
+    last_health_check TIMESTAMP WITH TIME ZONE,
+    deployment_url TEXT,
+    version TEXT DEFAULT '1.0.0',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
