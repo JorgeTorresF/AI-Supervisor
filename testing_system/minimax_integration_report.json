@@ -1,0 +1,93 @@
+{
+  "test_type": "minimax_integration",
+  "timestamp": "2025-08-19T22:28:16.962582",
+  "summary": {
+    "total_tests": 10,
+    "passed_tests": 4,
+    "failed_tests": 6,
+    "success_rate": 40.0,
+    "total_duration": 0.4294121265411377
+  },
+  "test_results": [
+    {
+      "test_name": "MiniMax Agent Detection",
+      "success": true,
+      "duration": 0.0008122920989990234,
+      "details": "MiniMax detection patterns found: minimax, agent, message",
+      "error": "",
+      "timestamp": "2025-08-19T22:28:16.533559"
+    },
+    {
+      "test_name": "Supervision Session Startup",
+      "success": false,
+      "duration": 0.047130584716796875,
+      "details": "",
+      "error": "Unexpected response status: 405",
+      "timestamp": "2025-08-19T22:28:16.580735"
+    },
+    {
+      "test_name": "Real-time Monitoring",
+      "success": false,
+      "duration": 0.03827953338623047,
+      "details": "",
+      "error": "module 'websockets.exceptions' has no attribute 'ConnectionRefused'",
+      "timestamp": "2025-08-19T22:28:16.619058"
+    },
+    {
+      "test_name": "Task Coherence Analysis",
+      "success": false,
+      "duration": 0.04478192329406738,
+      "details": "",
+      "error": "Unexpected analysis response status: 405",
+      "timestamp": "2025-08-19T22:28:16.663880"
+    },
+    {
+      "test_name": "Intervention Triggering",
+      "success": false,
+      "duration": 0.042191505432128906,
+      "details": "",
+      "error": "Unexpected intervention response status: 405",
+      "timestamp": "2025-08-19T22:28:16.706109"
+    },
+    {
+      "test_name": "Activity Logging",
+      "success": false,
+      "duration": 0.04383516311645508,
+      "details": "",
+      "error": "Unexpected logging response status: 405",
+      "timestamp": "2025-08-19T22:28:16.749983"
+    },
+    {
+      "test_name": "Cross-Platform Sync",
+      "success": false,
+      "duration": 0.039047956466674805,
+      "details": "",
+      "error": "Unexpected sync response status: 405",
+      "timestamp": "2025-08-19T22:28:16.789066"
+    },
+    {
+      "test_name": "Performance Impact Assessment",
+      "success": true,
+      "duration": 0.11900806427001953,
+      "details": "Performance impact: -45.1% (baseline: 0.02s, supervised: 0.01s)",
+      "error": "",
+      "timestamp": "2025-08-19T22:28:16.908114"
+    },
+    {
+      "test_name": "Error Handling and Recovery",
+      "success": true,
+      "duration": 9.179115295410156e-05,
+      "details": "Error handling system components present",
+      "error": "",
+      "timestamp": "2025-08-19T22:28:16.908231"
+    },
+    {
+      "test_name": "Data Privacy and Security",
+      "success": true,
+      "duration": 0.05423331260681152,
+      "details": "Data privacy measures available (score: 1/2)",
+      "error": "",
+      "timestamp": "2025-08-19T22:28:16.962496"
+    }
+  ]
+}
