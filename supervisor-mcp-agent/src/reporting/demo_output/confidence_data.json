@@ -1,0 +1,83 @@
+[
+  {
+    "decision_id": "decision_task_001",
+    "agent_id": "agent_001",
+    "task_id": "task_001",
+    "predicted_confidence": 0.87,
+    "actual_outcome": true,
+    "decision_type": "invoice",
+    "timestamp": "2025-08-18T16:15:49.800332"
+  },
+  {
+    "decision_id": "dec_001",
+    "predicted_confidence": 0.95,
+    "actual_outcome": true,
+    "agent_id": "agent_001",
+    "task_id": "task_010",
+    "decision_type": "classification",
+    "timestamp": "2025-08-18T16:15:49.800695"
+  },
+  {
+    "decision_id": "dec_002",
+    "predicted_confidence": 0.85,
+    "actual_outcome": true,
+    "agent_id": "agent_002",
+    "task_id": "task_011",
+    "decision_type": "classification",
+    "timestamp": "2025-08-18T16:15:49.800699"
+  },
+  {
+    "decision_id": "dec_003",
+    "predicted_confidence": 0.75,
+    "actual_outcome": false,
+    "agent_id": "agent_003",
+    "task_id": "task_012",
+    "decision_type": "classification",
+    "timestamp": "2025-08-18T16:15:49.800702"
+  },
+  {
+    "decision_id": "dec_004",
+    "predicted_confidence": 0.65,
+    "actual_outcome": true,
+    "agent_id": "agent_001",
+    "task_id": "task_013",
+    "decision_type": "classification",
+    "timestamp": "2025-08-18T16:15:49.800705"
+  },
+  {
+    "decision_id": "dec_005",
+    "predicted_confidence": 0.45,
+    "actual_outcome": false,
+    "agent_id": "agent_002",
+    "task_id": "task_014",
+    "decision_type": "classification",
+    "timestamp": "2025-08-18T16:15:49.800707"
+  },
+  {
+    "decision_id": "dec_006",
+    "predicted_confidence": 0.35,
+    "actual_outcome": false,
+    "agent_id": "agent_003",
+    "task_id": "task_015",
+    "decision_type": "classification",
+    "timestamp": "2025-08-18T16:15:49.800709"
+  },
+  {
+    "decision_id": "dec_007",
+    "predicted_confidence": 0.25,
+    "actual_outcome": false,
+    "agent_id": "agent_001",
+    "task_id": "task_016",
+    "decision_type": "classification",
+    "timestamp": "2025-08-18T16:15:49.800711"
+  },
+  {
+    "decision_id": "dec_008",
+    "predicted_confidence": 0.15,
+    "actual_outcome": false,
+    "agent_id": "agent_002",
+    "task_id": "task_017",
+    "decision_type": "classification",
+    "timestamp": "2025-08-18T16:15:49.800713"
+  }
+]

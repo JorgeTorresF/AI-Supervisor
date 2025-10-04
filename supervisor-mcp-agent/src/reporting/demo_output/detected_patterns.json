@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pattern_001",
+    "name": "Timeout Failures",
+    "pattern_type": "failure",
+    "description": "Recurring timeout errors detected",
+    "frequency": 1,
+    "confidence": 0.8,
+    "impact_score": 0.7,
+    "recommendations": [
+      "Increase timeout thresholds",
+      "Optimize processing algorithms",
+      "Implement retry mechanisms"
+    ]
+  },
+  {
+    "id": "pattern_002",
+    "name": "Slow Performance",
+    "pattern_type": "performance",
+    "description": "Tasks taking longer than expected",
+    "frequency": 1,
+    "confidence": 0.9,
+    "impact_score": 0.6,
+    "recommendations": [
+      "Profile task execution",
+      "Optimize resource allocation",
+      "Consider parallel processing"
+    ]
+  },
+  {
+    "id": "pattern_003",
+    "name": "Low Confidence Decisions",
+    "pattern_type": "confidence",
+    "description": "Multiple decisions with low confidence scores",
+    "frequency": 4,
+    "confidence": 0.85,
+    "impact_score": 0.5,
+    "recommendations": [
+      "Review decision models",
+      "Increase training data",
+      "Implement confidence thresholds"
+    ]
+  }
+]

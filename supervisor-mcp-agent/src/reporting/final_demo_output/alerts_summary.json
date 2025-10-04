@@ -1,0 +1,10 @@
+{
+  "total_active": 5,
+  "by_severity": {
+    "critical": 1,
+    "high": 2,
+    "medium": 2,
+    "low": 0
+  },
+  "by_type": {}
+}

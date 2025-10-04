@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-08-18T16:15:49.801068",
+  "metrics": {
+    "total_tasks": 3,
+    "completed_tasks": 1,
+    "failed_tasks": 1,
+    "success_rate": 33.3,
+    "active_alerts": 1,
+    "detected_patterns": 3,
+    "avg_confidence": 0.586
+  },
+  "status": "operational"
+}

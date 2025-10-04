@@ -1,0 +1,8 @@
+{
+  "total_entries": 30,
+  "mean_confidence": 0.65,
+  "accuracy": 0.5,
+  "calibration_error": 0.35,
+  "brier_score": 0.1516666666666667,
+  "overconfidence_ratio": 0.25
+}
